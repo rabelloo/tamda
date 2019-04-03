@@ -1,10 +1,31 @@
 {
-  "name": "fp",
+  "name": "tamda",
   "version": "1.0.0",
-  "description": "TypeScript functional programming",
+  "description": "Practical functional programming library for TypeScript",
   "author": "Andre Luiz Rabello <andre.luiz_r@hotmail.com>",
   "license": "MIT",
-  "private": true,
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabelloo/tamda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rabelloo/tamda/issues"
+  },
+  "homepage": "https://github.com/rabelloo/tamda#readme",
+  "keywords": [
+    "typescript",
+    "functional",
+    "programming",
+    "fp",
+    "ramda",
+    "lodash",
+    "underscore",
+    "ts-fp"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "tslint src/**/*.ts --fix",
