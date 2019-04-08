@@ -1,30 +1,41 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
+/**
+ * Creates a new object with all properties but `props` from the `source` object.
+ * @param source Object to pick properties from.
+ * @param props Properties to exclude from the resulting object.
+ * @example ```typescript
+ * const source = { id: 1, original: true };
+ * exclude(source, 'original');
+ * // { id: 1 } ```
+ */
 export function exclude<T extends object>(
-  obj: T,
+  source: T,
   ...props: (keyof T)[]
 ): Partial<T>;
+/**
+ * Creates a new object with all properties but `props` from the `source` object.
+ * @param props Properties to exclude from the resulting object.
+ * @example ```typescript
+ * const source = { id: 1, original: true };
+ * const justId = exclude('original');
+ * justId(source);
+ * // { id: 1 } ```
+ */
 export function exclude<T extends object>(
   ...props: (keyof T)[]
-): Unary<T, Partial<T>>;
-/**
- * Creates a new object with all but the specified properties from the source object.
- *
- * @example
- * ```typescript
- * const source = { id: 1, original: true };
- * exclude(source, ['original']);
- * // { id: 1 }
- * ```
- */
-export function exclude(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _exclude(...args);
+): typeof deferred;
+export function exclude() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _exclude = infer(
+/**
+ * Creates a new object with all properties but previously specified `props` from the `source` object.
+ * @param source Object to pick properties from.
+ */
+declare function deferred<T extends object>(source: T): Partial<T>;
+
+const inferred = infer(
   <T extends object>(source: T, ...props: (keyof T)[]): Partial<T> =>
     props.reduce(
       (clone, prop) => {
@@ -32,7 +43,7 @@ const _exclude = infer(
         delete clone[prop];
         return clone;
       },
-      { ...source } as any
+      { ...source }
     ),
   args => args[0] instanceof Object
 );

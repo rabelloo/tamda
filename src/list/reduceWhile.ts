@@ -1,48 +1,56 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Reducer, ReducePredicate } from '../operators';
 
-export function reduceWhile<T, U>(
-  array: T[],
-  whileFn: (acc: U, item: T, index: number, array: T[]) => boolean,
-  reduceFn: (acc: U, item: T, index: number, array: T[]) => U,
-  initialValue: U
-): U;
-export function reduceWhile<T, U>(
-  whileFn: (acc: U, item: T, index: number, array: T[]) => boolean,
-  reduceFn: (acc: U, item: T, index: number, array: T[]) => U,
-  initialValue: U
-): Unary<T[], U>;
 /**
- * Reduces the array to an accumulated form while the predicate is true.
- * @param whileFn A function that determines when to stop reducing,
- * return true to continue or false to stop.
+ * Reduces an `array` to an accumulated form according to a function `reduceFn` while a predicate `whileFn` is true.
+ * @param array Array to reduce.
+ * @param whileFn A function that determines when to stop reducing, return true to continue or false to stop.
  * @param reduceFn A function that accumulates members.
+ * @param initialValue Accumulator initial value.
  */
-export function reduceWhile(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _reduceWhile(...args);
+export function reduceWhile<T, R>(
+  array: T[],
+  whileFn: ReducePredicate<T, R>,
+  reduceFn: Reducer<T, R>,
+  initialValue: R
+): R;
+/**
+ * Returns a function that
+ * reduces an `array` to an accumulated form according to a function `reduceFn` while a predicate `whileFn` is true.
+ * @param whileFn A function that determines when to stop reducing, return true to continue or false to stop.
+ * @param reduceFn A function that accumulates members.
+ * @param initialValue Accumulator initial value.
+ */
+export function reduceWhile<T, U>(
+  whileFn: (acc: U, item: T, index: number, array: T[]) => boolean,
+  reduceFn: (acc: U, item: T, index: number, array: T[]) => U,
+  initialValue: U
+): typeof deferred;
+export function reduceWhile() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _reduceWhile = infer(
-  <T, U>(
-    array: T[],
-    whileFn: (acc: U, item: T, index: number, array: T[]) => boolean,
-    reduceFn: (acc: U, item: T, index: number, array: T[]) => U,
-    initialValue: U
-  ): U => {
-    let acc = initialValue;
-    for (let i = 0; i < array.length; i++) {
-      const item = array[i];
-      const next = reduceFn(acc, item, i, array);
+/**
+ * Reduces an `array` to an accumulated form according to a previously specified
+ * function `reduceFn` while a previously specified predicate `whileFn` is true.
+ * @param array Array to reduce.
+ */
+declare function deferred<T, R>(array: T[]): R;
 
-      if (!whileFn(next, item, i, array)) {
+const inferred = infer(
+  <T, R>(array: T[], whileFn: ReducePredicate<T, R>, reduceFn: Reducer<T, R>, initialValue: R): R => {
+    let accumulator = initialValue;
+    for (let index = 0; index < array.length; index++) {
+      const item = array[index];
+      const next = reduceFn(accumulator, item, index, array);
+
+      if (!whileFn(next, item, index, array)) {
         break;
       }
 
-      acc = next;
+      accumulator = next;
     }
 
-    return acc;
+    return accumulator;
   }
 );

@@ -1,36 +1,40 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Predicate } from '../operators';
 
-export function split<T>(
-  array: T[],
-  predicate: (item: T, index: number, array: T[]) => boolean
-): [T[], T[]];
-export function split<T>(
-  predicate: (item: T, index: number, array: T[]) => boolean
-): Unary<T[], [T[], T[]]>;
 /**
- * Splits the array in two, determined by a specified predicate.
- *
- * @param predicate Function that determines which half to put each `T`.
+ * Splits an `array` in two, according to `predicate`.
+ * @param array Array to split.
+ * @param predicate Function that determines in which half to put each item.
  * @returns Tuple like `[[match the predicate], [do not match the predicate]]`.
  */
-export function split(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _split(...args);
+export function split<T>(array: T[], predicate: Predicate<T>): [T[], T[]];
+/**
+ * Returns a function that
+ * splits an `array` in two, according to `predicate`.
+ * @param predicate Function that determines in which half to put each item.
+ */
+export function split<T>(predicate: Predicate<T>): typeof deferred;
+export function split() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _split = infer(
-  <T>(array: T[], predicate: (item: T, index: number, array: T[]) => boolean) =>
-    array.reduce(
-      (tuple, item, index) => {
-        const match = predicate(item, index, array);
-        const which = match ? tuple[0] : tuple[1];
+/**
+ * Splits an `array` in two, according to `predicate`.
+ * @param array Array to split.
+ * @returns Tuple like `[[match the predicate], [do not match the predicate]]`.
+ */
+declare function deferred<T>(array: T[]): [T[], T[]];
 
-        // Faster than spreading, safe here
-        which.push(item);
-        return tuple;
-      },
-      [[], []] as [T[], T[]]
-    )
+const inferred = infer(<T>(array: T[], predicate: Predicate<T>) =>
+  array.reduce(
+    (tuple, item, index) => {
+      const match = predicate(item, index, array);
+      const which = match ? tuple[0] : tuple[1];
+
+      // Faster than spreading, safe here
+      which.push(item);
+      return tuple;
+    },
+    [[], []] as [T[], T[]]
+  )
 );

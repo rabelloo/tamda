@@ -1,17 +1,28 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
-
-export function last(text: string): string;
-export function last<T>(array: T[]): T;
-export function last<T>(): Unary<T[], T>;
 
 /**
- * Returns the last item of the list.
+ * Returns the last character in a string `text`, or `undefined` if empty.
+ * @param text String to get last character from.
  */
-export function last(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _last(...args);
+export function last(text: string): string | undefined;
+/**
+ * Returns the last item in an `array`, or `undefined` if empty.
+ * @param array Array to get last item from.
+ */
+export function last<T>(array: T[]): T | undefined;
+/**
+ * Returns a function that
+ * returns the last item in a `list`, or `undefined` if empty.
+ */
+export function last(): typeof deferred;
+export function last() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _last = infer(<T>(list: T[]): T => list[list.length - 1]);
+/**
+ * Returns the last item in a `list`, or `undefined` if empty.
+ * @param list List to get last item from.
+ */
+declare function deferred<T>(list: string | T[]): T | undefined;
+
+const inferred = infer(<T>(list: T[]): T => list[list.length - 1]);

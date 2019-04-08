@@ -1,24 +1,23 @@
+import { Unary } from '../operators';
+
 /**
  * Creates a function that can infer the first argument according to the number of supplied arguments.
  *
- * If all arguments are supplied, immediately invokes the function. Otherwise, return a function
- * that expects the first argument of the original function.
+ * If all arguments are supplied, immediately invokes the function.
+ * Otherwise, return a function that expects the first argument of the original function.
  *
  * @param ready Optionally determine when a function is ready for execution.
  * Default `args.length >= fn.length`.
  *
- * @example
- * ```typescript
+ * @example ```typescript
  * const map = (array, fn) => array.map(fn);
  * const inferredMap = infer(map);
  * inferredMap([1, 2, 3], n => n + 1);
  * // [2, 3, 4]
  * inferredMap (n => n + 1) ([1, 2, 3]);
- * // [2, 3, 4]
- * ```
+ * // [2, 3, 4] ```
  *
  * Useful for composing/piping, e.g.
- *
  * ```typescript
  * const transform = pipe(
  *  map(n => n + 1),
@@ -26,14 +25,25 @@
  *  filter(n => n > 5)
  * );
  * transform([1, 2, 3]);
- * // [6, 8]
- * ```
+ * // [6, 8] ```
  */
-export function infer(
-  // tslint:disable-next-line: ban-types
-  fn: Function,
-  ready = (args: any[]) => args.length >= fn.length
-) {
-  return (...args: any[]) =>
-    ready(args) ? fn(...args) : (first: any) => fn(first, ...args);
+export function infer<T, R>(
+  fn: Infer<T, R>,
+  ready = isReady(fn)
+): Inferred<T, R> {
+  // tslint:disable-next-line: only-arrow-functions
+  return function() {
+    // faster than spread, i.e. (...args: unknown[]) => {}
+    const args = arguments;
+
+    return ready(args as any)
+      ? fn.apply(undefined, args)
+      : (first: T) => fn(first, ...args);
+  };
 }
+
+const isReady = <T, R>(fn: Infer<T, R>) => (args: unknown[]) =>
+  args.length >= fn.length;
+
+type Infer<T, R> = (first: T, ...args: unknown[]) => R | Unary<T, R>;
+type Inferred<T, R> = (...args: unknown[]) => R & Unary<T, R>;

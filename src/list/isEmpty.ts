@@ -1,17 +1,28 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
-
-export function isEmpty(text: string): boolean;
-export function isEmpty<T>(array: T[]): boolean;
-export function isEmpty<T>(): Unary<string | T[], boolean>;
 
 /**
- * Determines whether or not the source array is empty.
+ * Determines whether or not a string `text` is empty.
+ * @param text String to check.
  */
-export function isEmpty(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _isEmpty(...args);
+export function isEmpty(text: string): boolean;
+/**
+ * Determines whether or not an `array` is empty.
+ * @param array Array to check.
+ */
+export function isEmpty<T>(array: T[]): boolean;
+/**
+ * Returns a function that
+ * determines whether or not a `list` is empty.
+ */
+export function isEmpty(): typeof deferred;
+export function isEmpty() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _isEmpty = infer(<T>(list: string | T[]): boolean => list.length === 0);
+/**
+ * Determines whether or not a `list` is empty.
+ * @param list List to check.
+ */
+declare function deferred<T>(list: string | T[]): boolean;
+
+const inferred = infer(<T>(list: string | T[]): boolean => list.length === 0);

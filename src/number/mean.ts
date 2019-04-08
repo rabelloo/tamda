@@ -1,16 +1,24 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 import { sum } from './sum';
 
-export function mean(array: number[]): number;
-export function mean(): Unary<number[], number>;
 /**
- * Returns the mean of all `number[]` members.
+ * Determines the mean (average) of all `array` numbers.
+ * @param array Array with numbers to determine mean.
  */
-export function mean(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _mean(...args);
+export function mean(array: number[]): number;
+/**
+ * Returns a function that
+ * determines the mean (average) of all `array` numbers.
+ */
+export function mean(): typeof deferred;
+export function mean() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _mean = infer((array: number[]) => sum(array) / array.length);
+/**
+ * Determines the mean (average) of all `array` numbers.
+ * @param array Array with numbers to determine mean.
+ */
+declare function deferred(array: number[]): number;
+
+const inferred = infer((array: number[]) => sum(array) / array.length);

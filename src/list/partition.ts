@@ -1,29 +1,31 @@
 import { identity } from '../function/identity';
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Mapper } from '../operators';
 
-export function partition<T, K>(
-  array: T[],
-  keyFn?: (item: T, index: number, array: T[]) => K
-): [K, T[]];
-export function partition<T, K>(
-  keyFn?: (item: T, index: number, array: T[]) => K
-): Unary<T[], [K, T[]]>;
 /**
- * Creates partitions of the array by the key extracted from each item by the specified function.
- * @param keyFn Function that extracts a key from each `T`. Default: `identity`.
+ * Creates partitions of an `array` by the key extracted from each item by a function `keyFn`.
+ * @param array Array to partition.
+ * @param keyFn Function that extracts a key from each item. Default: `identity`.
  */
-export function partition(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _partition(...args);
+export function partition<T, K>(array: T[], keyFn?: Mapper<T, K>): [K, T[]][];
+/**
+ * Returns a function that
+ * creates partitions of an `array` by the key extracted from each item by a function `keyFn`.
+ * @param keyFn Function that extracts a key from each item. Default: `identity`.
+ */
+export function partition<T, K>(keyFn?: Mapper<T, K>): typeof deferred;
+export function partition() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _partition = infer(
-  <T, K>(
-    array: T[],
-    keyFn: (item: T, index?: number, array?: T[]) => K = identity as any
-  ): [K, T[]] =>
+/**
+ * Creates partitions of an `array` by the key extracted from each item by a previously defined function `keyFn`.
+ * @param array Array to partition.
+ */
+declare function deferred<T, K>(array: T[]): [K, T[]][];
+
+const inferred = infer(
+  <T, K>(array: T[], keyFn: Mapper<T, K> = identity as any): [K, T[]][] =>
     Array.from(
       array.reduce((map, item, index) => {
         const key = keyFn(item, index, array);
@@ -33,13 +35,12 @@ const _partition = infer(
           map.set(key, []);
         }
 
-        // Faster than spreading the array,
+        // Faster than spreading the array,safe here.
         // i.e. map.set(key, [ ...map.get(key), item ]),
-        // safe here.
-        map.get(key).push(item);
+        map.get(key)!.push(item);
 
         return map;
-      }, new Map())
-    ) as any,
+      }, new Map<K, T[]>())
+    ),
   args => args[0] instanceof Array
 );

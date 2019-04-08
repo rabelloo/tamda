@@ -1,30 +1,40 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
+/**
+ * Creates a new object with only properties `prop` from the `source` object.
+ * @param source Object to pick properties from.
+ * @param props Properties to pick from source object.
+ * @example ```typescript
+ * const source = { id: 1, original: true };
+ * pick(source, 'id');
+ * // { id: 1 } ```
+ */
 export function pick<T extends object>(
-  obj: T,
+  source: T,
   ...props: (keyof T)[]
 ): Partial<T>;
-export function pick<T extends object>(
-  ...props: (keyof T)[]
-): Unary<T, Partial<T>>;
 /**
- * Creates a new object with only the specified properties from the source object.
- *
- * @example
- * ```typescript
+ * Returns a function that
+ * creates a new object with only properties `prop` from the `source` object.
+ * @param props Properties to pick from source object.
+ * @example ```typescript
  * const source = { id: 1, original: true };
- * pick(source, ['id']);
- * // { id: 1 }
- * ```
+ * const justId = pick('id');
+ * justId(source);
+ * // { id: 1 } ```
  */
-export function pick(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _pick(...args);
+export function pick<T extends object>(...props: (keyof T)[]): typeof deferred;
+export function pick() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _pick = infer(
+/**
+ * Creates a new object with only properties `prop` from the `source` object.
+ * @param source Object to pick properties from.
+ */
+declare function deferred<T extends object>(source: T): Partial<T>;
+
+const inferred = infer(
   <T extends object>(source: T, ...props: (keyof T)[]): Partial<T> =>
     props.reduce(
       (obj, prop) => {
@@ -32,7 +42,7 @@ const _pick = infer(
         obj[prop] = source[prop];
         return obj;
       },
-      {} as any
+      {} as T
     ),
   args => args[0] instanceof Object
 );

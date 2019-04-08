@@ -1,26 +1,29 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Predicate } from '../operators';
 
-export function filter<T>(
-  array: T[],
-  predicate: (item: T, index: number, array: T[]) => boolean
-): T[];
-export function filter<T>(
-  predicate: (item: T, index: number, array: T[]) => boolean
-): Unary<T[], T[]>;
 /**
- * Filters the members of an array so that only those who match the criteria specified in the predicate will be kept.
- * @param predicate Function that determines whether or not the item is kept in the resulting array.
+ * Filters the members of an `array` so that only those who match the criteria specified in a `predicate` will be kept.
+ * @param array Array to filter.
+ * @param predicate Function that determines whether or not an item is kept in the resulting array.
  */
-export function filter(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _filter(...args);
+export function filter<T>(array: T[], predicate: Predicate<T>): T[];
+/**
+ * Returns a function that
+ * filters the members of an `array` so that only those who match the criteria specified in a `predicate` will be kept.
+ * @param predicate Function that determines whether or not an item is kept in the resulting array.
+ */
+export function filter<T>(predicate: Predicate<T>): typeof deferred;
+export function filter() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _filter = infer(
-  <T>(
-    array: T[],
-    predicate: (item: T, index: number, array: T[]) => boolean
-  ): T[] => array.filter(predicate)
+/**
+ * Filters the members of an `array` so that
+ * only those who match the criteria specified in a previously specified `predicate` will be kept.
+ * @param array Array to filter.
+ */
+declare function deferred<T>(array: T[]): T[];
+
+const inferred = infer(
+  <T>(array: T[], predicate: Predicate<T>): T[] => array.filter(predicate)
 );

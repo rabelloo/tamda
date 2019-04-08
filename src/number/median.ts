@@ -1,22 +1,31 @@
 import { infer } from '../function/infer';
 import { sort } from '../list/sort';
-import { Unary } from '../operators';
 
-export function median(array: number[]): number;
-export function median(): Unary<number[], number>;
 /**
- * Returns the median of all `number[]` members.
+ * Determines the median of all `array` numbers.
+ * @param array Array with numbers to determine median.
  */
-export function median(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _median(...args);
+export function median(array: number[]): number;
+/**
+ * Returns a function that
+ * determines the median of all `array` numbers.
+ */
+export function median(): typeof deferred;
+export function median() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _median = infer((array: number[]) => {
-  const sorted = sort(array);
+/**
+ * Determines the median of all `array` numbers.
+ * @param array Array with numbers to determine median.
+ */
+declare function deferred(array: number[]): number;
 
-  return sorted.length % 2 === 0 ? middleMean(sorted) : middle(sorted);
+const inferred = infer((array: number[]) => {
+  const sorted = sort(array);
+  const odd = sorted.length % 2;
+
+  return odd ? middle(sorted) : middleMean(sorted);
 });
 
 function middleLeft(array: number[]): number {

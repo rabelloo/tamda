@@ -1,12 +1,13 @@
 /**
- * Opposes values returned by the specified function.
- *
+ * Creates a function that opposes values returned by a function `fn`.
  * @note Opposite means multiplying numbers by -1.
- *
- * Ramda's `negate`.
+ * @note Ramda's `negate`.
  */
 export function opposite<F extends NumberFn>(fn: F): F {
-  return ((...args: any[]) => fn(...args) * -1) as any;
+  // tslint:disable-next-line: only-arrow-functions
+  return function() {
+    return fn.apply(undefined, arguments) * -1;
+  } as F;
 }
 
 type NumberFn = (...args: any[]) => number;

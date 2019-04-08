@@ -1,15 +1,23 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
-export function reverse<T>(array: T[]): T[];
-export function reverse<T>(): Unary<T[], T[]>;
 /**
- * Reverses the array sorting/order.
+ * Reverses an `array` sorting/order.
+ * @param array Array to reverse.
  */
-export function reverse(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _reverse(...args);
+export function reverse<T>(array: T[]): T[];
+/**
+ * Returns a function that
+ * reverses an `array` sorting/order.
+ */
+export function reverse(): typeof deferred;
+export function reverse() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _reverse = infer(<T>(array: T[]): T[] => array.slice().reverse());
+/**
+ * Reverses an `array` sorting/order.
+ * @param array Array to reverse.
+ */
+declare function deferred<T>(array: T[]): T[];
+
+const inferred = infer(<T>(array: T[]): T[] => array.slice().reverse());

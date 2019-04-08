@@ -1,18 +1,18 @@
 import { between } from './between';
 
 describe('between', () => {
-  it('should filter items between min and max in a number array', () => {
-    const array = [1, 2, 3, 4, 5];
-    const min = 2;
-    const max = 4;
+  it('should determine whether a number is between min and max (both inclusive)', () => {
+    const num = 2;
+    const min = 1;
+    const max = 3;
 
     const results = [
-      between(array, min, max),
-      between (min, max) (array),
+      between(num, min, max),
+      between (min, max) (num),
     ];
 
     results.forEach(result => {
-      expect(result).toEqual([2, 3, 4]);
+      expect(result).toBe(true);
     });
   });
 });

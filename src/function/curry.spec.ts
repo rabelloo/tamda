@@ -10,41 +10,55 @@ describe('curry', () => {
   });
 
   it('should optimize arities up to 5', () => {
-    const fn0 = () => 0;
-    const fn1 = (a: number) => a;
-    const fn2 = (a: number, b: number) => a + b;
-    const fn3 = (a: number, b: number, c: number) => a + b + c;
-    const fn4 = (a: number, b: number, c: number, d: number) => a + b + c + d;
-    const fn5 = (a: number, b: number, c: number, d: number, e: number) =>
+    const nAry0 = () => 0;
+    const nAry1 = (a: number) => a;
+    const nAry2 = (a: number, b: number) => a + b;
+    const nAry3 = (a: number, b: number, c: number) => a + b + c;
+    const nAry4 = (a: number, b: number, c: number, d: number) => a + b + c + d;
+    const nAry5 = (a: number, b: number, c: number, d: number, e: number) =>
       a + b + c + d + e;
+    const nAry6 = (a: number, b: number, c: number, d: number, e: number, f: number) =>
+      a + b + c + d + e + f;
+    const nAry7 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number) =>
+      a + b + c + d + e + f + g;
+    const nAry8 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) =>
+      a + b + c + d + e + f + g + h;
+    const nAry9 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) =>
+      a + b + c + d + e + f + g + h + i;
+    const nAry10 = (
+      a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number
+    ) => a + b + c + d + e + f + g + h + i + j;
 
-    const curried0 = curry(fn0);
-    const curried1 = curry(fn1);
-    const curried2 = curry(fn2);
-    const curried3 = curry(fn3);
-    const curried4 = curry(fn4);
-    const curried5 = curry(fn5);
+    const curriedFunctions = [
+      curry(nAry0),
+      curry(nAry1),
+      curry(nAry2),
+      curry(nAry3),
+      curry(nAry4),
+      curry(nAry5),
+      curry(nAry6),
+      curry(nAry7),
+      curry(nAry8),
+      curry(nAry9),
+      curry(nAry10),
+    ];
 
-    expect(curried0()).toBe(0);
-    expect(curried1(1)).toBe(1);
-    expect(curried2(1)(1)).toBe(2);
-    expect(curried3(1)(1)(1)).toBe(3);
-    expect(curried4(1)(1)(1)(1)).toBe(4);
-    expect(curried5(1)(1)(1)(1)(1)).toBe(5);
+    const loop = (fn: (arg: any) => any, times: number, value = 1) =>
+      Array(times || 1).fill(null).reduce(next => next(value), fn);
+
+    curriedFunctions.forEach((fn, i) => {
+      expect(loop(fn, i)).toBe(i);
+    });
   });
 
-  it(`should support arities larger than 5, however it's not optimized`, () => {
-    const fn6 = (
-      a: number,
-      b: number,
-      c: number,
-      d: number,
-      e: number,
-      f: number
-    ) => a + b + c + d + e + f;
+  it(`should support arities larger than 10, however it's not optimized`, () => {
+    const nAry11 = (
+      a: number, b: number, c: number, d: number, e: number, f: number,
+      g: number, h: number, i: number, j: number, k: number
+    ) => a + b + c + d + e + f + g + h + i + j + k;
 
-    const curried6 = curry(fn6);
+    const c11 = curry(nAry11);
 
-    expect(curried6(1)(1)(1)(1)(1)(1)).toBe(6);
+    expect(c11(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)).toBe(11);
   });
 });

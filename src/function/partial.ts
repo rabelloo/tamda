@@ -12,9 +12,103 @@ export function partial<A, B, C, D, E, F>(fn: (a: A, b: B, c: C, d: D, e: E) => 
 export function partial<A, B, C, D, E, F>(fn: (a: A, b: B, c: C, d: D, e: E) => F, a: A, b: B, c: C): (d: D, e: E) => F;
 export function partial<A, B, C, D, E, F>(fn: (a: A, b: B, c: C, d: D, e: E) => F, a: A, b: B, c: C, d: D): (e: E) => F;
 
+export function partial<A, B, C, D, E, F, G>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G, a: A): (b: B, c: C, d: D, e: E, f: F) => G;
+export function partial<A, B, C, D, E, F, G>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G, a: A, b: B): (c: C, d: D, e: E, f: F) => G;
+export function partial<A, B, C, D, E, F, G>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G, a: A, b: B, c: C): (d: D, e: E, f: F) => G;
+export function partial<A, B, C, D, E, F, G>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G, a: A, b: B, c: C, d: D): (e: E, f: F) => G;
+export function partial<A, B, C, D, E, F, G>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G, a: A, b: B, c: C, d: D, e: E): (f: F) => G;
+
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A): (b: B, c: C, d: D, e: E, f: F, g: G) => H;
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A, b: B): (c: C, d: D, e: E, f: F, g: G) => H;
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A, b: B, c: C): (d: D, e: E, f: F, g: G) => H;
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A, b: B, c: C, d: D): (e: E, f: F, g: G) => H;
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A, b: B, c: C, d: D, e: E): (f: F, g: G) => H;
+export function partial<A, B, C, D, E, F, G, H>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H, a: A, b: B, c: C, d: D, e: E, f: F): (g: G) => H;
+
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A): (b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B): (c: C, d: D, e: E, f: F, g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B, c: C): (d: D, e: E, f: F, g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B, c: C, d: D): (e: E, f: F, g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B, c: C, d: D, e: E): (f: F, g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B, c: C, d: D, e: E, f: F): (g: G, h: H) => I;
+export function partial<A, B, C, D, E, F, G, H, I>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I, a: A, b: B, c: C, d: D, e: E, f: F, g: G): (h: H) => I;
+
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A
+): (b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B
+): (c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C
+): (d: D, e: E, f: F, g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C, d: D
+): (e: E, f: F, g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C, d: D, e: E
+): (f: F, g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C, d: D, e: E, f: F
+): (g: G, h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C, d: D, e: E, f: F, g: G
+): (h: H, i: I) => J;
+export function partial<A, B, C, D, E, F, G, H, I, J>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J, a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H
+): (i: I) => J;
+
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A
+): (b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B
+): (c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C
+): (d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C, d: D
+): (e: E, f: F, g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C, d: D, e: E
+): (f: F, g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C, d: D, e: E, f: F
+): (g: G, h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C, d: D, e: E, f: F, g: G
+): (h: H, i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K, a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H
+): (i: I, j: J) => K;
+export function partial<A, B, C, D, E, F, G, H, I, J, K>(
+  fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K,
+  a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I
+): (j: J) => K;
+
 /**
- * Creates a partially applied version of the supplied function.
- *
+ * Creates a partially applied version of function `fn`.
+ * @param fn Function to partially apply.
+ * @param args Arguments to provide to function.
  * @example
  * ```typescript
  * const sum = (a, b) => a + b;
@@ -25,5 +119,8 @@ export function partial<A, B, C, D, E, F>(fn: (a: A, b: B, c: C, d: D, e: E) => 
  */
 // tslint:disable-next-line: ban-types
 export function partial(fn: Function, ...args: any[]) {
-  return (...rest: any[]) => fn(...args, ...rest);
+  // tslint:disable-next-line: only-arrow-functions
+  return function() {
+    return fn(...args, ...arguments);
+  };
 }

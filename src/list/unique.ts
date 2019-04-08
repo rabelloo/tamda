@@ -1,39 +1,48 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
-export function unique<T>(
-  array: T[],
-  keyFn?: (item: T, index: number) => any
-): T[];
-export function unique<T>(
-  keyFn?: (item: T, index: number) => any
-): Unary<T[], T[]>;
 /**
- * Filters duplicate items using the keys extracted from each item.
- *
+ * Filters duplicate items in an `array` using the keys extracted from each item by a function `keyFn`.
  * @note When keys are equal, the last item is kept.
- *
- * @param keyFn Optional function that extracts a key from each `T`.
- * Default: `identity()`
- *
- * @example
- * ```typescript
+ * @param array Array to filter.
+ * @param keyFn Optional function that extracts a key from each item. Default: `identity()`.
+ * @example ```typescript
  * const array = [{ id: 4 }, { id: 1 }, { id: 4, last: true }];
  * unique(array, x => x.id);
- * // [{ id: 1 }, { id: 4, last: true }]
- * ```
+ * // [{ id: 1 }, { id: 4, last: true }] ```
  */
-export function unique(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _unique(...args);
+export function unique<T>(array: T[], keyFn?: KeyFn<T>): T[];
+/**
+ * Returns a function that
+ * filters duplicate items in an `array` using the keys extracted from each item by a function `keyFn`.
+ * @note When keys are equal, the last item is kept.
+ * @param keyFn Optional function that extracts a key from each item. Default: `identity()`.
+ * @example ```typescript
+ * const array = [{ id: 4 }, { id: 1 }, { id: 4, last: true }];
+ * const uniqId = unique(x => x.id);
+ * uniqId(array);
+ * // [{ id: 1 }, { id: 4, last: true }] ```
+ */
+export function unique<T>(keyFn?: KeyFn<T>): typeof deferred;
+export function unique() {
+  return inferred.apply(undefined, arguments);
 }
 
-const fn = <T>(array: T[], keyFn?: (item: T, index: number) => any): T[] =>
-  keyFn
-    ? Array.from(
-        new Map(array.map((t, i) => [keyFn(t, i), t] as [any, T])).values()
-      )
-    : Array.from(new Set(array));
+/**
+ * Filters duplicate items in an `array` using the keys extracted
+ * from each item by a previously specified function `keyFn`.
+ * @note When keys are equal, the last item is kept.
+ * @param array Array to filter.
+ */
+declare function deferred<T>(array: T[]): T[];
 
-// tslint:disable-next-line: variable-name
-const _unique = infer(fn, args => args[0] instanceof Array);
+type KeyFn<T> = (item: T, index: number) => any;
+
+const inferred = infer(
+  <T>(array: T[], keyFn?: KeyFn<T>): T[] =>
+    keyFn
+      ? Array.from(
+          new Map(array.map((t, i) => [keyFn(t, i), t] as [any, T])).values()
+        )
+      : Array.from(new Set(array)),
+  args => args[0] instanceof Array
+);

@@ -1,9 +1,8 @@
 /**
- * Compares two values on equality, greater than or lesser than.
- *
- * @returns -
- * - 1 if `a` > `b`
- * - -1 if `b` > `a`
+ * Compares two values, `a` and `b`, on equality, greater than or lesser than.
+ * @returns
+ * - 1 if `a > b`
+ * - -1 if `b > a`
  * - 0 otherwise
  */
 export function compareValue(a: any, b: any): 0 | 1 | -1 {

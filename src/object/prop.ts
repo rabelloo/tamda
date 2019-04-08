@@ -1,20 +1,30 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
+/**
+ * Extracts the value of the property `prop` in a `source` object.
+ * @param source Object to pick property from.
+ * @param prop Property name/key to extract value from `source`.
+ */
 export function prop<T extends object, K extends keyof T>(
-  obj: T,
+  source: T,
   prop: K
 ): T[K];
-export function prop<T extends object>(prop: keyof T): Unary<T, T[keyof T]>;
 /**
- * Extracts the value of the specified property in an object.
+ * Returns a function that
+ * extracts the value of the property `prop` in a `source` object.
+ * @param prop Property name/key to extract value from `source`.
  */
-export function prop(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _prop(...args);
+export function prop<T extends object>(prop: keyof T): typeof deferred;
+export function prop() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _prop = infer(
-  <T extends object, K extends keyof T>(obj: T, key: K): T[K] => obj[key]
+/**
+ * Extracts the value of the property `prop` in a `source` object.
+ * @param source Object to pick property from.
+ */
+declare function deferred<T extends object, K extends keyof T>(source: T): T[K];
+
+const inferred = infer(
+  <T extends object, K extends keyof T>(source: T, key: K): T[K] => source[key]
 );

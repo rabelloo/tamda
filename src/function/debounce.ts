@@ -1,7 +1,8 @@
 /**
- * Debounces the specified function so that it is only invoked
- * once the specified amount of time passes without any calls.
- * @note Calling the function will reset the timer.
+ * Creates a function that debounces function `fn` so that it is only invoked
+ * when `time` in milliseconds has passed without any calls to the generated function.
+ * @note Calling the generated function will reset the timer.
+ * @param fn Function to invoke.
  * @param time Amount of milliseconds to debounce. Default: `0`
  * @example
  * ```typescript
@@ -19,8 +20,9 @@
 export function debounce<F extends Function>(fn: F, time = 0): F {
   let timeout: NodeJS.Timeout;
 
-  return ((...args: any[]) => {
+  // tslint:disable-next-line: only-arrow-functions
+  return function() {
     clearTimeout(timeout);
-    timeout = setTimeout(fn as any, time, ...args);
-  }) as any;
+    timeout = setTimeout(fn as any, time, ...arguments);
+  } as any;
 }

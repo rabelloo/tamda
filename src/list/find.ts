@@ -1,27 +1,32 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Predicate } from '../operators';
 
-export function find<T>(
-  array: T[],
-  predicate: (item: T, index: number, array: T[]) => boolean
-): T | undefined;
-export function find<T>(
-  predicate: (item: T, index: number, array: T[]) => boolean
-): Unary<T[], T | undefined>;
 /**
- * Finds the first item in an array that matches the specified predicate,
+ * Finds the first item in an `array` that matches a `predicate`,
  * or `undefined` if no match is found.
- * @param predicate Function that determines whether or not the item is a match.
+ * @param array Array to look in.
+ * @param predicate Function that determines whether or not an item is a match.
  */
-export function find(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _find(...args);
+export function find<T>(array: T[], predicate: Predicate<T>): T | undefined;
+/**
+ * Returns a function that
+ * finds the first item in an `array` that matches a `predicate`,
+ * or `undefined` if no match is found.
+ * @param predicate Function that determines whether or not an item is a match.
+ */
+export function find<T>(predicate: Predicate<T>): typeof deferred;
+export function find() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _find = infer(
-  <T>(
-    array: T[],
-    predicate: (item: T, index: number, array: T[]) => boolean
-  ): T | undefined => array.find(predicate)
+/**
+ * Finds the first item in an `array` that matches a previously specified `predicate`,
+ * or `undefined` if no match is found.
+ * @param array Array to look in.
+ */
+declare function deferred<T>(array: T[]): T | undefined;
+
+const inferred = infer(
+  <T>(array: T[], predicate: Predicate<T>): T | undefined =>
+    array.find(predicate)
 );

@@ -1,24 +1,28 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Mapper } from '../operators';
 
-export function map<T, U>(
-  array: T[],
-  mapFn: (item: T, index: number, array: T[]) => U
-): U[];
-export function map<T, U>(
-  mapFn: (item: T, index: number, array: T[]) => U
-): Unary<T[], U[]>;
 /**
- * Transforms each item in an array according to a `mapFn`.
+ * Transforms each item in an `array` according to a function `mapFn`.
+ * @param array Array to map over.
  * @param mapFn A function that projects each member to its new form.
  */
-export function map(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _map(...args);
+export function map<T, R>(array: T[], mapFn: Mapper<T, R>): R[];
+/**
+ * Returns a function that
+ * transforms each item in an `array` according to a function `mapFn`.
+ * @param mapFn A function that projects each member to its new form.
+ */
+export function map<T, R>(mapFn: Mapper<T, R>): typeof deferred;
+export function map() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _map = infer(
-  <T, U>(array: T[], mapFn: (item: T, index: number, array: T[]) => U): U[] =>
-    array.map(mapFn)
+/**
+ * Transforms each item in an `array` according to a previously specified function `mapFn`.
+ * @param array Array to map.
+ */
+declare function deferred<T, R>(array: T[]): R[];
+
+const inferred = infer(
+  <T, R>(array: T[], mapFn: Mapper<T, R>): R[] => array.map(mapFn)
 );

@@ -1,49 +1,62 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 import { difference } from './difference';
 import { union } from './union';
 
+/**
+ * Filters items that are only in `arrayA` or `arrayB`, but not both.
+ * @note From set theory, given sets A and B, denoted A △ B or A ⊖ B,
+ * returns the set of symmetricDifference members of exactly one of A and B
+ * (elements which are in one of the sets, but not in both).
+ * @param arrayA First array to find and compare items.
+ * @param arrayB Second array to find and compare items.
+ * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
+ * @example ```typescript
+ * symmetricDifference([1, 2, 3], [2, 3, 4]);
+ * // [1, 4] ```
+ */
 export function symmetricDifference<T>(
   arrayA: T[],
   arrayB: T[],
-  keyFn?: (item: T, index: number) => any
+  keyFn?: KeyFn<T>
 ): T[];
-export function symmetricDifference<T>(
-  arrayB: T[],
-  keyFn?: (item: T, index: number) => any
-): Unary<T[], T[]>;
 /**
- * Filters items that are only contained in the first array of two given arrays.
- *
- * @note From set theory, givern sets A and B, denoted A △ B or A ⊖ B,
+ * Returns a function that
+ * filters items that are only in `arrayA` or `arrayB`, but not both.
+ * @note From set theory, given sets A and B, denoted A △ B or A ⊖ B,
  * returns the set of symmetricDifference members of exactly one of A and B
  * (elements which are in one of the sets, but not in both).
- *
- * @param keyFn An optional function to extract a key for comparison between array items.
- * Default: `identity()`
- *
- * @example
- * ```typescript
- * symmetricDifference([1, 2, 3], [2, 3, 4]);
- * // [1, 4]
- * ```
+ * @param arrayB Second array to find and compare items.
+ * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
+ * @example ```typescript
+ * const symDiff = symmetricDifference([2, 3, 4]);
+ * symDiff([1, 2, 3]);
+ * // [1, 4] ```
  */
-export function symmetricDifference(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _symmetricDifference(...args);
+export function symmetricDifference<T>(
+  arrayB: T[],
+  keyFn?: KeyFn<T>
+): typeof deferred;
+export function symmetricDifference() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _symmetricDifference = infer(
-  <T>(
-    arrayA: T[],
-    arrayB: T[],
-    keyFn?: (item: T, index: number) => any
-  ): T[] => {
-    const diffA = difference(arrayA, arrayB);
-    const diffB = difference(arrayB, arrayA);
+/**
+ * Filters items that are only in `arrayA` or `arrayB`, but not both.
+ * @note From set theory, given sets A and B, denoted A △ B or A ⊖ B,
+ * returns the set of symmetricDifference members of exactly one of A and B
+ * (elements which are in one of the sets, but not in both).
+ * @param arrayA First array to find and compare items.
+ */
+declare function deferred<T>(arrayA: T[]): T[];
+
+const inferred = infer(
+  <T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[] => {
+    const diffA = difference(arrayA, arrayB, keyFn);
+    const diffB = difference(arrayB, arrayA, keyFn);
 
     return union(diffA, diffB, keyFn);
   },
   args => [args[0], args[1]].every(arg => arg instanceof Array)
 );
+
+type KeyFn<T> = (item: T, index: number) => any;

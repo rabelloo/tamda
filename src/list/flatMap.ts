@@ -1,29 +1,31 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Mapper } from '../operators';
 
-export function flatMap<T, U>(
-  array: T[],
-  mapFn: (item: T, index: number, array: T[]) => U[]
-): U[];
-export function flatMap<T, U>(
-  mapFn: (item: T, index: number, array: T[]) => U[]
-): Unary<T[], U[]>;
 /**
- * Flattens the array while mapping items according to the specified function.
- * @param mapFn Function that extracts an array from each `T`.
+ * Maps over an `array` according to a function `mapFn`, then flattens the result.
+ * @param array Array to map over.
+ * @param mapFn Function that extracts an array from each item.
  */
-export function flatMap(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _flatMap(...args);
+export function flatMap<T, R>(array: T[], mapFn: Mapper<T, R[]>): R[];
+/**
+ * Returns a function that
+ * maps over an `array` according to a function `mapFn`, then flattens the result.
+ * @param mapFn Function that extracts an array from each item.
+ */
+export function flatMap<T, R>(mapFn: Mapper<T, R[]>): typeof deferred;
+export function flatMap() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _flatMap = infer(
-  <T, U>(
-    array: T[],
-    mapFn: (item: T, index: number, array: T[]) => U[]
-  ): U[] => {
-    const mapOrEmpty = (item: T, index: number): U[] => {
+/**
+ * Maps over an `array` according to a previously specified function `mapFn`, then flattens the result.
+ * @param array Array to map over.
+ */
+declare function deferred<T, R>(array: T[]): R[];
+
+const inferred = infer(
+  <T, R>(array: T[], mapFn: Mapper<T, R[]>): R[] => {
+    const mapOrEmpty = (item: T, index: number): R[] => {
       const mapped = mapFn(item, index, array);
       return mapped instanceof Array ? mapped : [];
     };
@@ -31,10 +33,11 @@ const _flatMap = infer(
     return array.reduce(
       (flatten, item, index) => {
         // Faster than spreading, safe here
+        // i.e. [ ...flatten, ...mapOrEmpty(item, index) ]
         flatten.push(...mapOrEmpty(item, index));
         return flatten;
       },
-      [] as U[]
+      [] as R[]
     );
   }
 );

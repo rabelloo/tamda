@@ -1,6 +1,7 @@
 /**
- * Creates a function that caches the result of the specified function for each set of arguments,
- * avoiding computation when a matching cache has already been stored.
+ * Creates a function that caches the result of function `fn` for each set of arguments,
+ * avoiding computation when a matching set is invoked again.
+ * @param fn Function to memoize.
  */
 // tslint:disable-next-line: ban-types
 export function memoize<F extends Function>(fn: F): F {
@@ -17,7 +18,7 @@ function navigate(cache: Map<any, any>, fn: Function, args: any[]) {
     (branch, arg) => getOrSet(branch, arg, () => new Map()),
     cache
   );
-  return getOrSet(leaf, resultKey, () => fn(...args));
+  return getOrSet(leaf, resultKey, () => fn.apply(undefined, args));
 }
 
 function getOrSet(map: Map<any, any>, key: any, computeValue: () => any) {

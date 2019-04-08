@@ -1,22 +1,34 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
+/**
+ * Maps the extracted value of a property `key` of each object in an `array`.
+ * @note Same as `map(prop())`
+ * @param array Array to map over.
+ * @param key Key to pick from each item.
+ */
 export function pluck<T extends object, K extends keyof T>(
   array: T[],
   key: K
 ): T[K][];
-export function pluck<T extends object>(key: keyof T): Unary<T[], T[keyof T][]>;
 /**
- * Maps the extracted value of the specified property in an object.
+ * Returns a function that
+ * maps the extracted value of a property `key` of each object in an `array`.
  * @note Same as `map(prop())`
+ * @param key Key to pick from each item.
  */
-export function pluck(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _pluck(...args);
+export function pluck<T extends object>(key: keyof T): typeof deferred;
+export function pluck() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _pluck = infer(
+/**
+ * Maps the extracted value of a previously specified property `key` of each object in an `array`.
+ * @note Same as `map(prop())`
+ * @param array Array to map over.
+ */
+declare function deferred<T extends object>(array: T[]): T[keyof T][];
+
+const inferred = infer(
   <T extends object, K extends keyof T>(array: T[], key: K): T[K][] =>
     array.map(obj => obj[key])
 );

@@ -1,20 +1,45 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
-
-export function concat(text: string, item: string): string;
-export function concat(item: string): Unary<string, string>;
-
-export function concat<T>(list: T[], item: T | T[]): T[];
-export function concat<T>(item: T | T[]): Unary<T[], T[]>;
 
 /**
- * Appends an item to a specified list.
- * @param item Item to append to list.
+ * Appends string `b` to string `a`.
+ * @param a Base string.
+ * @param b String to be appended.
  */
-export function concat(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _concat(...args);
+export function concat(a: string, b: string): string;
+/**
+ * Returns a function that
+ * appends string `b` to string `a`.
+ * @param b String to be appended.
+ */
+export function concat(b: string): typeof deferredString;
+
+/**
+ * Appends an `item` to an `array`.
+ * @param array Array to append item to.
+ * @param item Item to append to array.
+ */
+export function concat<T>(array: T[], item: T | T[]): T[];
+/**
+ * Returns a function that
+ * appends an `item` to an `array`.
+ * @param item Item to append to array.
+ */
+export function concat<T>(item: T | T[]): typeof deferredArray;
+
+export function concat() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _concat = infer(<T>(list: T[], item: T | T[]): T[] => list.concat(item));
+/**
+ * Appends previously specified string `b` to string `a`.
+ * @param a Base string.
+ */
+declare function deferredString(a: string): string;
+
+/**
+ * Appends a previously specified `item` to an `array`.
+ * @param array Array to append item to.
+ */
+declare function deferredArray<T>(array: T[]): T[];
+
+const inferred = infer(<T>(list: T[], item: T | T[]): T[] => list.concat(item));

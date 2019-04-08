@@ -81,9 +81,9 @@ export function compose<A, B, C, D, E, F, G, H, I, J, K>(
  *
  * Opposite function composition direction of `pipe`.
  */
-export function compose<O extends Unary<any, any>>(
+export function compose<O extends Unary<unknown, unknown>>(
   ...operators: O[]
-): (start: any) => any {
+): (start: unknown) => unknown {
   const lastOperator = operators.pop()!;
   return (...start) =>
     operators.reduceRight(

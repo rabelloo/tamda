@@ -1,17 +1,23 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
-export function sum(array: number[]): number;
-export function sum(): Unary<number[], number>;
 /**
- * Sums all `number[]` members.
+ * Sums all `array` numbers.
  */
-export function sum(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _sum(...args);
+export function sum(array: number[]): number;
+/**
+ * Returns a function that
+ * sums all `array` numbers.
+ */
+export function sum(): typeof deferred;
+export function sum() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _sum = infer(
+/**
+ * Sums all `array` numbers.
+ */
+declare function deferred(array: number[]): number;
+
+const inferred = infer(
   (array: number[]): number => array.reduce((total, n) => total + n, 0)
 );

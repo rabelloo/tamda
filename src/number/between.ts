@@ -1,18 +1,32 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
-export function between(array: number[], min: number, max: number): number[];
-export function between(min: number, max: number): Unary<number[], number[]>;
 /**
- * Filters only members that are between the specified min and max.
+ * Determines whether a number `num` is between a `min` and a `max`.
+ * @note Inclusive, i.e. `between(0, 0, 0) === true`
+ * @param num Target number.
+ * @param min Minimum value.
+ * @param max Maximum value.
  */
-export function between(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _between(...args);
+export function between(num: number, min: number, max: number): number[];
+/**
+ * Returns a function that
+ * determines whether a number `num` is between a `min` and a `max`.
+ * @note Inclusive, i.e. `between(0, 0, 0) === true`
+ * @param min Minimum value.
+ * @param max Maximum value.
+ */
+export function between(min: number, max: number): typeof deferred;
+export function between() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _between = infer(
-  (array: number[], min: number, max: number): number[] =>
-    array.filter(n => min <= n && n <= max)
+/**
+ * Determines whether a number `num` is between both previously specified `min` and `max`.
+ * @note Inclusive, i.e. `between(0, 0, 0) === true`
+ * @param num Target number.
+ */
+declare function deferred(num: number): boolean;
+
+const inferred = infer(
+  (num: number, min: number, max: number): boolean => min <= num && num <= max
 );

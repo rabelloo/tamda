@@ -1,15 +1,23 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
-export function max(array: number[]): number;
-export function max(): Unary<number[], number>;
 /**
- * Determines the largest number in the array.
+ * Determines the largest number in an `array`.
+ * @param array Array to find largest number in.
  */
-export function max(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _max(...args);
+export function max(array: number[]): number;
+/**
+ * Returns a function that
+ * determines the largest number in an `array`.
+ */
+export function max(): typeof deferred;
+export function max() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _max = infer((numbers: number[]): number => Math.max(...numbers));
+/**
+ * Determines the largest number in an `array`.
+ * @param array Array to find largest number in.
+ */
+declare function deferred(array: number[]): number;
+
+const inferred = infer((numbers: number[]): number => Math.max(...numbers));

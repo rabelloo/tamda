@@ -1,26 +1,28 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
+import { Predicate } from '../operators';
 
-export function all<T>(
-  array: T[],
-  predicate: (item: T, index: number, array: T[]) => boolean
-): boolean;
-export function all<T>(
-  predicate: (item: T, index: number, array: T[]) => boolean
-): Unary<T[], boolean>;
 /**
- * Determines whether or not all items in the array match a specified predicate.
+ * Determines whether or not all members of an `array` match a `predicate`.
+ * @param array Array to look in.
  * @param predicate Function to determine a match.
  */
-export function all(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _all(...args);
+export function all<T>(array: T[], predicate: Predicate<T>): boolean;
+/**
+ * Returns a function that
+ * determines whether or not all members of an `array` match a `predicate`.
+ * @param predicate Function to determine a match.
+ */
+export function all<T>(predicate: Predicate<T>): typeof deferred;
+export function all() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _all = infer(
-  <T>(
-    array: T[],
-    predicate: (item: T, index: number, array: T[]) => boolean
-  ): boolean => array.every(predicate)
+/**
+ * Determines whether or not all members of an `array` match a previously specified `predicate`.
+ * @param array Array to look in.
+ */
+declare function deferred<T>(array: T[]): boolean;
+
+const inferred = infer(
+  <T>(array: T[], predicate: Predicate<T>): boolean => array.every(predicate)
 );

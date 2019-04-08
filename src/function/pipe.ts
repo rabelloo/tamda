@@ -80,10 +80,10 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
  *
  * In some libraries this function is named `sequence`.
  */
-export function pipe<O extends Unary<any, any>>(
+export function pipe<O extends Unary<unknown, unknown>>(
   firstOperator: O,
   ...operators: O[]
-): (start: any) => any {
+): (start: unknown) => unknown {
   return (...start) =>
     operators.reduce(
       (previousValue, op) => op(previousValue),

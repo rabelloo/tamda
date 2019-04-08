@@ -1,24 +1,36 @@
 import { infer } from '../function/infer';
-import { Unary } from '../operators';
 
+/**
+ * Merges two objects, `objA` and `objB`, with preference for B's properties.
+ * @note Same as `{ ...objA, ...objB }`
+ * @param objA Object on the left of the merge.
+ * @param objB Object on the right of the merge.
+ */
 export function merge<A extends object, B extends object>(
   objA: A,
   objB: B
 ): A & B;
+/**
+ * Returns a function that
+ * merges two objects, `objA` and `objB`, with preference for B's properties.
+ * @note Same as `{ ...objA, ...objB }`
+ * @param objB Object on the right of the merge.
+ */
 export function merge<A extends object, B extends object>(
   objB: B
-): Unary<A, A & B>;
-/**
- * Merges two objects, A and B, with preference for B's properties.
- * @note Same as `{ ...objA, ...objB }`
- */
-export function merge(...args: any[]) {
-  // tslint:disable-next-line: no-use-before-declare
-  return _merge(...args);
+): typeof deferred;
+export function merge() {
+  return inferred.apply(undefined, arguments);
 }
 
-// tslint:disable-next-line: variable-name
-const _merge = infer(
+/**
+ * Merges two objects, `objA` and previously specified `objB`, with preference for B's properties.
+ * @note Same as `{ ...objA, ...objB }`
+ * @param objA Object on the left of the merge.
+ */
+declare function deferred<A extends object, B extends object>(objA: A): A & B;
+
+const inferred = infer(
   <A extends object, B extends object>(objA: A, objB: B): A & B => ({
     ...objA,
     ...objB,
