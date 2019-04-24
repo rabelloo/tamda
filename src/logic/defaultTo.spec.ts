@@ -3,7 +3,7 @@ import { defaultTo } from './defaultTo';
 describe('defaultTo', () => {
   it('should return the result itself when not null, undefined or NaN', () => {
     const obj = {};
-    const array = [];
+    const array: any[] = [];
 
     const withDefault = defaultTo(1);
 
