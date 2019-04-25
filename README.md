@@ -46,19 +46,19 @@ It also means that functions are not "automatically curried" like in `Ramda`, wh
 import { groupBy } from 'tamda';
 
 const data = [
-  { id: 1, type: 'functional', name: 'groupBy' },
-  { id: 2, type: 'functional', name: 'map' },
-  { id: 3, type: 'imperative', name: 'for' },
+  { type: 'functional', name: 'groupBy' },
+  { type: 'functional', name: 'map' },
+  { type: 'imperative', name: 'for' },
 ];
 
 groupBy(data, d => d.type);
 // {
 //   functional: [
-//     { id: 1, type: 'functional', name: 'groupBy' },
-//     { id: 2, type: 'functional', name: 'map' },
+//     { type: 'functional', name: 'groupBy' },
+//     { type: 'functional', name: 'map' },
 //   ],
 //   imperative: [
-//     { id: 3, type: 'imperative', name: 'for' },
+//     { type: 'imperative', name: 'for' },
 //   ],
 // }
 ```
@@ -86,21 +86,21 @@ doubleSumUniqueOdds(data);
 // 18
 ```
 
-You can also inline pipe execution with `use`, which will infer the type beforehand and immediately invoke `pipe` or `compose` when eithe is called.
+You can also inline pipe execution with `use`, which will infer the type beforehand and immediately invoke `pipe` or `compose` when either is called.
 
 ```typescript
 import { not, pluck, reduceWhile, tap, union, use } from 'tamda';
 
 const data = [
-  { id: 1, amount: 3 },
-  { id: 2, amount: 5 },
-  { id: 3, amount: 3 },
+  { amount: 3 },
+  { amount: 5 },
+  { amount: 3 },
 ];
 
 const moreData = [
-  { id: 4, amount: 4 },
-  { id: 5, amount: 2 },
-  { id: 6, amount: 8 },
+  { amount: 4 },
+  { amount: 2 },
+  { amount: 8 },
 ];
 
 const hasEnough = (total: number) => total > 10;
@@ -110,8 +110,8 @@ const accumulate = pipe(
 );
 
 use(data).pipe(
+  union(moreData, d => d.amount),
   pluck('amount'), // same as  map(prop('amount'))
-  union(moreData),
   reduceWhile(not(hasEnough), accumulate, 0)
 );
 // 0, 3, ...
