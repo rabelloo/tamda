@@ -45,5 +45,5 @@ export function infer<T, R>(
 const isReady = <T, R>(fn: Infer<T, R>) => (args: unknown[]) =>
   args.length >= fn.length;
 
-type Infer<T, R> = (first: T, ...args: unknown[]) => R | Unary<T, R>;
+type Infer<T, R> = (first: T, ...args: any[]) => R | Unary<T, R>;
 type Inferred<T, R> = (...args: unknown[]) => R & Unary<T, R>;

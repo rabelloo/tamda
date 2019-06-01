@@ -18,7 +18,7 @@
  */
 // tslint:disable-next-line: ban-types
 export function debounce<F extends Function>(fn: F, time = 0): F {
-  let timeout: NodeJS.Timeout;
+  let timeout: number;
 
   // tslint:disable-next-line: only-arrow-functions
   return function() {

@@ -1,4 +1,5 @@
 import { infer } from '../function/infer';
+import { Indexable } from '../indexable';
 
 /**
  * Transforms a `source` object based on specified functions for each property in an object `mapper`.
@@ -36,13 +37,13 @@ export type Mapper<T> = { [K in keyof T]?: (p: T[K]) => T[K] };
 declare function deferred<T>(source: T): T;
 
 const inferred = infer(
-  <T extends object>(source: T, mapper: Mapper<T>): T =>
+  <T extends Indexable>(source: T, mapper: Mapper<T>): T =>
     Object.entries(mapper).reduce(
       (clone, [key, fn]) => {
         // Faster than spreading, safe here
-        clone[key] = fn(clone[key]);
+        (clone as any)[key] = fn!(clone[key]);
         return clone;
       },
-      { ...source } as any
+      { ...source }
     )
 );

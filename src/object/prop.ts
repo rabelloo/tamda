@@ -1,11 +1,12 @@
 import { infer } from '../function/infer';
+import { Indexable } from '../indexable';
 
 /**
  * Extracts the value of the property `prop` in a `source` object.
  * @param source Object to pick property from.
  * @param prop Property name/key to extract value from `source`.
  */
-export function prop<T extends object, K extends keyof T>(
+export function prop<T extends Indexable, K extends keyof T>(
   source: T,
   prop: K
 ): T[K];
@@ -14,7 +15,7 @@ export function prop<T extends object, K extends keyof T>(
  * extracts the value of the property `prop` in a `source` object.
  * @param prop Property name/key to extract value from `source`.
  */
-export function prop<T extends object>(prop: keyof T): typeof deferred;
+export function prop<T extends Indexable>(prop: keyof T): typeof deferred;
 export function prop() {
   return inferred.apply(undefined, arguments);
 }
@@ -23,8 +24,8 @@ export function prop() {
  * Extracts the value of the property `prop` in a `source` object.
  * @param source Object to pick property from.
  */
-declare function deferred<T extends object, K extends keyof T>(source: T): T[K];
+declare function deferred<T extends Indexable, K extends keyof T>(source: T): T[K];
 
 const inferred = infer(
-  <T extends object, K extends keyof T>(source: T, key: K): T[K] => source[key]
+  <T extends Indexable, K extends keyof T>(source: T, key: K): T[K] => source[key]
 );

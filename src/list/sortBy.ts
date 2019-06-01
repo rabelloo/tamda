@@ -34,7 +34,7 @@ interface Options {
 }
 
 const inferred = infer(
-  <T>(array: T[], mapFn: MapFn<T>, options = { reverse: false }): T[] =>
+  <T>(array: T[], mapFn: MapFn<T>, options: Options = { reverse: false }): T[] =>
     sort(
       array,
       !options.reverse ? compareFn(mapFn) : opposite(compareFn(mapFn))
