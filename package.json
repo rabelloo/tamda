@@ -33,7 +33,7 @@
     "lint:ci": "tslint src/**/*.ts",
     "test": "jest --watch",
     "test:ci": "jest --coverage",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
