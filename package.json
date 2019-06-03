@@ -1,6 +1,6 @@
 {
   "name": "tamda",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Practical functional programming library for TypeScript",
   "author": "Andre Luiz Rabello <andre.luiz_r@hotmail.com>",
   "license": "MIT",
@@ -24,7 +24,8 @@
     "ts-fp"
   ],
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "tsc",
