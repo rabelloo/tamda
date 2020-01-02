@@ -4,7 +4,7 @@ Practical functional programming library for TypeScript
 
 ## Goal
 
-Other functional programming languages either lack TypeScript support - or has it very shallowly, or dive too deep into functional programming with mandatory data structures such as Functors and Monads.
+Other functional programming libraries either have none or lacking TypeScript support, or dive too deep into functional programming with mandatory data structures such as Functors and Monads.
 
 Tamda aims to address these issues:
 
@@ -14,7 +14,9 @@ Tamda aims to address these issues:
 
 The entire Tamda API revolves around pure functions: input/output.
 
-All of them are exported separately so that they can be tree-shaken, but they can all be imported from index, e.g. `import { <fn> } from 'tamda'`.
+All of them are exported separately so that they can be tree-shaken, but they can all be imported from index.
+
+e.g. `import { <fn> } from 'tamda'`
 
 ## Similarities
 
