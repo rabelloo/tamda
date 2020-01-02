@@ -1,6 +1,6 @@
 {
   "name": "tamda",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Practical functional programming library for TypeScript",
   "author": "Andre Luiz Rabello <andre.luiz_r@hotmail.com>",
   "license": "MIT",
