@@ -3,8 +3,7 @@
  * avoiding computation when a matching set is invoked again.
  * @param fn Function to memoize.
  */
-// tslint:disable-next-line: ban-types
-export function memoize<F extends Function>(fn: F): F {
+export function memoize<F extends Fn>(fn: F): F {
   const cache = new Map();
 
   return ((...args: any[]) => navigate(cache, fn, args)) as any;
@@ -12,8 +11,9 @@ export function memoize<F extends Function>(fn: F): F {
 
 const resultKey = '~result~';
 
-// tslint:disable-next-line: ban-types
-function navigate(cache: Map<any, any>, fn: Function, args: any[]) {
+type Fn = (...args: any) => any;
+
+function navigate(cache: Map<any, any>, fn: Fn, args: any[]) {
   const leaf = args.reduce(
     (branch, arg) => getOrSet(branch, arg, () => new Map()),
     cache

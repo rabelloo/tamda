@@ -1,31 +1,163 @@
 type Loop<T> = ((arg: unknown) => Loop<T>) & ((arg: unknown) => T);
 
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 export function curry<A>(fn: () => A): () => A;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 export function curry<A, B>(fn: (a: A) => B): (a: A) => B;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 export function curry<A, B, C>(fn: (a: A, b: B) => C): (a: A) => (b: B) => C;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D>(fn: (a: A, b: B, c: C) => D): (a: A) => (b: B) => (c: C) => D;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E>(fn: (a: A, b: B, c: C, d: D) => E): (a: A) => (b: B) => (c: C) => (d: D) => E;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F>(fn: (a: A, b: B, c: C, d: D, e: E) => F):
   (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F, G>(fn: (a: A, b: B, c: C, d: D, e: E, f: F) => G):
   (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => G;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F, G, H>(fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H):
   (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => H;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F, G, H, I>(fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I):
   (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => I;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F, G, H, I, J>(fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => J):
   (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => J;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 // prettier-ignore
 export function curry<A, B, C, D, E, F, G, H, I, J, K>(
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => K
 ): (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => K;
+/**
+ * Creates a curried version of the supplied function.
+ *
+ * Strict Functional Programming definition and not Ramda's.
+ *
+ * @example
+ * const sum = (a, b) => a + b;
+ * const sumCurried = curry(sum);
+ * sumCurried (1) (2);
+ * // 3
+ */
 export function curry<T = unknown>(fn: (...args: unknown[]) => T): Loop<T>;
 
 /**

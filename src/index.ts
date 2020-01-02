@@ -13,6 +13,7 @@ export { infer } from './function/infer';
 export { memoize } from './function/memoize';
 export { partial } from './function/partial';
 export { pipe } from './function/pipe';
+export { tap } from './function/tap';
 export { use } from './function/use';
 
 // List
@@ -42,7 +43,6 @@ export { sortBy } from './list/sortBy';
 export { split } from './list/split';
 export { take } from './list/take';
 export { takeWhile } from './list/takeWhile';
-export { tap } from './list/tap';
 export { toObjectMap } from './list/toObjectMap';
 export { unique } from './list/unique';
 
