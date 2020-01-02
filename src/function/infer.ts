@@ -9,23 +9,23 @@ import { Unary } from '../operators';
  * @param ready Optionally determine when a function is ready for execution.
  * Default `args.length >= fn.length`.
  *
- * @example ```typescript
+ * @example
  * const map = (array, fn) => array.map(fn);
  * const inferredMap = infer(map);
  * inferredMap([1, 2, 3], n => n + 1);
  * // [2, 3, 4]
  * inferredMap (n => n + 1) ([1, 2, 3]);
- * // [2, 3, 4] ```
+ * // [2, 3, 4]
  *
  * Useful for composing/piping, e.g.
- * ```typescript
+ *
  * const transform = pipe(
  *  map(n => n + 1),
  *  map(n => n * 2),
  *  filter(n => n > 5)
  * );
  * transform([1, 2, 3]);
- * // [6, 8] ```
+ * // [6, 8]
  */
 export function infer<T, R>(
   fn: Infer<T, R>,

@@ -1,75 +1,79 @@
 import { Unary } from '../operators';
 
-export function pipe<A, B>(operator: Unary<A, B>): Unary<A, B>;
-export function pipe<A, B, C>(op1: Unary<A, B>, op2: Unary<B, C>): Unary<A, C>;
-export function pipe<A, B, C, D>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>
-): Unary<A, D>;
-export function pipe<A, B, C, D, E>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>
-): Unary<A, E>;
-export function pipe<A, B, C, D, E, F>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>
-): Unary<A, F>;
-export function pipe<A, B, C, D, E, F, G>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>,
-  op6: Unary<F, G>
-): Unary<A, G>;
-export function pipe<A, B, C, D, E, F, G, H>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>,
-  op6: Unary<F, G>,
-  op7: Unary<G, H>
-): Unary<A, H>;
-export function pipe<A, B, C, D, E, F, G, H, I>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>,
-  op6: Unary<F, G>,
-  op7: Unary<G, H>,
-  op8: Unary<H, I>
-): Unary<A, I>;
-export function pipe<A, B, C, D, E, F, G, H, I, J>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>,
-  op6: Unary<F, G>,
-  op7: Unary<G, H>,
-  op8: Unary<H, I>,
-  op9: Unary<I, J>
-): Unary<A, J>;
-export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
-  op1: Unary<A, B>,
-  op2: Unary<B, C>,
-  op3: Unary<C, D>,
-  op4: Unary<D, E>,
-  op5: Unary<E, F>,
-  op6: Unary<F, G>,
-  op7: Unary<G, H>,
-  op8: Unary<H, I>,
-  op9: Unary<I, J>,
-  op10: Unary<J, K>
-): Unary<A, K>;
+type Fn = (...args: any) => any;
+type In<F extends Fn, R> = Unary<ReturnType<F>, R>;
+type Pipe<F extends Fn, R> = (...args: Parameters<F>) => R;
+
+export function pipe<Op extends Fn>(operator: Op): Op;
+export function pipe<Op extends Fn, R>(op1: Op, ops2: In<Op, R>): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, D, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, D>,
+  op6: Unary<D, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, D, E, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, D>,
+  op6: Unary<D, E>,
+  op7: Unary<E, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, D, E, F, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, D>,
+  op6: Unary<D, E>,
+  op7: Unary<E, F>,
+  op8: Unary<F, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, D, E, F, G, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, D>,
+  op6: Unary<D, E>,
+  op7: Unary<E, F>,
+  op8: Unary<F, G>,
+  op9: Unary<G, R>
+): Pipe<Op, R>;
+export function pipe<Op extends Fn, A, B, C, D, E, F, G, H, R>(
+  op1: Op,
+  op2: In<Op, A>,
+  op3: Unary<A, B>,
+  op4: Unary<B, C>,
+  op5: Unary<C, D>,
+  op6: Unary<D, E>,
+  op7: Unary<E, F>,
+  op8: Unary<F, G>,
+  op9: Unary<G, H>,
+  op10: Unary<H, R>
+): Pipe<Op, R>;
 
 /**
  * Composes a series of `Unary` operations into a single function.

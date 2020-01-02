@@ -6,10 +6,10 @@ import { Indexable } from '../indexable';
  * @note Specify type param `T` to get TypeScript inference on `mapper`, e.g. `transform<MyInterface>()`.
  * @param source Object to transform.
  * @param mapper Object with key/value pairs of property names and transforming functions.
- * @example ```typescript
+ * @example
  * const source = { order: 5, foo: 'bar' };
  * transform(source, { order: o => o + 1 });
- * // { order: 6, foo: 'bar' } ```
+ * // { order: 6, foo: 'bar' }
  */
 export function transform<T>(source: T, mapper: Mapper<T>): T;
 
@@ -18,10 +18,10 @@ export function transform<T>(source: T, mapper: Mapper<T>): T;
  * transforms a `source` object based on specified functions for each property in an object `mapper`.
  * @note Specify type param `T` to get TypeScript inference on `mapper`, e.g. `transform<MyInterface>()`.
  * @param mapper Object with key/value pairs of property names and transforming functions.
- * @example ```typescript
+ * @example
  * const incrementOrder = transform({ order: o => o + 1 });
  * incrementOrder({ order: 5, foo: 'bar' })
- * // { order: 6, foo: 'bar' } ```
+ * // { order: 6, foo: 'bar' }
  */
 export function transform<T>(mapper: Mapper<T>): typeof deferred;
 export function transform() {

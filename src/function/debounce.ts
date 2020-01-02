@@ -5,7 +5,6 @@
  * @param fn Function to invoke.
  * @param time Amount of milliseconds to debounce. Default: `0`
  * @example
- * ```typescript
  * let count = 0;
  * const debounced = debounce(() => count++);
  * debounced();
@@ -14,7 +13,6 @@
  * // 0
  * setTimeout(() => console.log(count));
  * // 1
- * ```
  */
 // tslint:disable-next-line: ban-types
 export function debounce<F extends Function>(fn: F, time = 0): F {

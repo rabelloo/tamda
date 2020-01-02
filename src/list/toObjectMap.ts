@@ -10,12 +10,12 @@ import { ObjectMap } from '../object-map';
  * @note `number` keys wil be converted to `string`.
  * @param array Array to transform.
  * @param keyFn Function that extracts a key from each item.
- * @example ```typescript
+ * @example
  * toObjectMap(
  *   [{ id: 4, name: 'John' }, { id: 1, name: 'Mary' }],
  *   x => x.id
  * )
- * // { '1': { id: 1, name: 'Mary' }, '4': { id: 4, name: 'John' }} ```
+ * // { '1': { id: 1, name: 'Mary' }, '4': { id: 4, name: 'John' }}
  */
 export function toObjectMap<T>(array: T[], keyFn: KeyFn<T>): ObjectMap<T>;
 /**
@@ -27,10 +27,10 @@ export function toObjectMap<T>(array: T[], keyFn: KeyFn<T>): ObjectMap<T>;
  *
  * @note `number` keys wil be converted to `string`.
  * @param keyFn Function that extracts a key from each item.
- * @example ```typescript
+ * @example
  * const byId = toObjectMap(x => x.id);
- * byId(([{ id: 4, name: 'John' }, { id: 1, name: 'Mary' }]))
- * // { '1': { id: 1, name: 'Mary' }, '4': { id: 4, name: 'John' }} ```
+ * byId([{ id: 4, name: 'John' }, { id: 1, name: 'Mary' }])
+ * // { '1': { id: 1, name: 'Mary' }, '4': { id: 4, name: 'John' }}
  */
 export function toObjectMap<T>(keyFn: KeyFn<T>): typeof deferred;
 export function toObjectMap() {
@@ -52,14 +52,11 @@ type KeyFn<T> = (item: T, index: number) => string | number;
 
 const inferred = infer(
   <T>(array: T[], keyFn: KeyFn<T>): ObjectMap<T> =>
-    array.reduce(
-      (objectMap, item, index) => {
-        const key = `${keyFn(item, index)}`;
+    array.reduce((objectMap, item, index) => {
+      const key = `${keyFn(item, index)}`;
 
-        // Faster than spreading, safe here
-        objectMap[key] = item;
-        return objectMap;
-      },
-      {} as ObjectMap<T>
-    )
+      // Faster than spreading, safe here
+      objectMap[key] = item;
+      return objectMap;
+    }, {} as ObjectMap<T>)
 );

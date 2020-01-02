@@ -7,9 +7,9 @@ import { infer } from '../function/infer';
  * @param arrayA Array to filter.
  * @param arrayB Array to check item existance.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * intersection([1, 2, 3], [2, 3, 4]);
- * // [2, 3] ```
+ * // [2, 3]
  */
 export function intersection<T>(
   arrayA: T[],
@@ -23,10 +23,10 @@ export function intersection<T>(
  * returns the set of intersection members of both A and B.
  * @param arrayB Array to check item existance.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const inBoth = intersection([2, 3, 4]);
  * inBoth([1, 2, 3]);
- * // [2, 3] ```
+ * // [2, 3]
  */
 export function intersection<T>(arrayB: T[], keyFn?: KeyFn<T>): typeof deferred;
 export function intersection() {

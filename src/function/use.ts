@@ -6,11 +6,11 @@ import { pipe } from './pipe';
  * Creates an object with functions `compose` and `pipe` that will
  * be immediately invoked with the provided value after construction.
  *
- * @example ```typescript
+ * @example
  * use([1, 2, 3]).pipe(sum());
  * // 6
  * pipe (sum()) ([1, 2, 3]);
- * // 6 ```
+ * // 6
  */
 export function use<T>(value: T): WithValue<T> {
   return {

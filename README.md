@@ -91,33 +91,31 @@ doubleSumUniqueOdds(data);
 You can also inline pipe execution with `use`, which will infer the type beforehand and immediately invoke `pipe` or `compose` when either is called.
 
 ```typescript
-import { not, pluck, reduceWhile, tap, union, use } from 'tamda';
+import { concat, not, pipe, pluck, reduceWhile, tap, use } from 'tamda';
 
 const data = [
-  { amount: 3 },
   { amount: 5 },
-  { amount: 3 },
+  { amount: 4 },
 ];
 
 const moreData = [
-  { amount: 4 },
+  { amount: 3 },
   { amount: 2 },
-  { amount: 8 },
 ];
 
 const hasEnough = (total: number) => total > 10;
 const accumulate = pipe(
-  tap(console.log),
-  (total: number, amount: number) => total + amount
+  (total: number, amount: number) => total + amount,
+  tap(console.log)
 );
 
 use(data).pipe(
-  union(moreData, d => d.amount),
+  concat(moreData),
   pluck('amount'), // same as  map(prop('amount'))
   reduceWhile(not(hasEnough), accumulate, 0)
 );
-// 0, 3, ...
-// 3, 5, ...
-// 8, 4, ...
-// 8
+// 5
+// 9
+// 12
+// > 12
 ```

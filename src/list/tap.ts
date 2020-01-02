@@ -18,15 +18,15 @@ export function tap() {
 
 /**
  * Invokes a previously specified function `fn` with `source` as argument, then returns the `source` itself.
- * @param fn Function to invoke with `source`.
+ * @param source Argument to supply to `fn`.
  */
 declare function deferred<T>(source: T): T;
 
-type Tapper<T> = (source: T) => void;
+type Tapper<T> = (source: T) => unknown;
 
 const inferred = infer(
-  <T>(source: T, invokeFn: Tapper<T>): T => {
-    invokeFn(source);
+  <T>(source: T, tapFn: Tapper<T>): T => {
+    tapFn(source);
     return source;
   }
 );

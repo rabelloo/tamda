@@ -5,10 +5,10 @@ import { infer } from '../function/infer';
  * @note When keys are equal, the last item is kept.
  * @param array Array to filter.
  * @param keyFn Optional function that extracts a key from each item. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const array = [{ id: 4 }, { id: 1 }, { id: 4, last: true }];
  * unique(array, x => x.id);
- * // [{ id: 1 }, { id: 4, last: true }] ```
+ * // [{ id: 1 }, { id: 4, last: true }]
  */
 export function unique<T>(array: T[], keyFn?: KeyFn<T>): T[];
 /**
@@ -16,11 +16,11 @@ export function unique<T>(array: T[], keyFn?: KeyFn<T>): T[];
  * filters duplicate items in an `array` using the keys extracted from each item by a function `keyFn`.
  * @note When keys are equal, the last item is kept.
  * @param keyFn Optional function that extracts a key from each item. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const array = [{ id: 4 }, { id: 1 }, { id: 4, last: true }];
  * const uniqId = unique(x => x.id);
  * uniqId(array);
- * // [{ id: 1 }, { id: 4, last: true }] ```
+ * // [{ id: 1 }, { id: 4, last: true }]
  */
 export function unique<T>(keyFn?: KeyFn<T>): typeof deferred;
 export function unique() {

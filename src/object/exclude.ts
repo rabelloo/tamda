@@ -4,10 +4,10 @@ import { infer } from '../function/infer';
  * Creates a new object with all properties but `props` from the `source` object.
  * @param source Object to pick properties from.
  * @param props Properties to exclude from the resulting object.
- * @example ```typescript
+ * @example
  * const source = { id: 1, original: true };
  * exclude(source, 'original');
- * // { id: 1 } ```
+ * // { id: 1 }
  */
 export function exclude<T extends object>(
   source: T,
@@ -16,11 +16,11 @@ export function exclude<T extends object>(
 /**
  * Creates a new object with all properties but `props` from the `source` object.
  * @param props Properties to exclude from the resulting object.
- * @example ```typescript
+ * @example
  * const source = { id: 1, original: true };
  * const justId = exclude('original');
  * justId(source);
- * // { id: 1 } ```
+ * // { id: 1 }
  */
 export function exclude<T extends object>(
   ...props: (keyof T)[]

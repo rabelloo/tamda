@@ -1,6 +1,7 @@
+// prettier-ignore
 import {
   Binary, Denary, Novenary, Nullary, Octonary, Quaternary,
-  Quinary, Senary, Septenary, Ternary, Unary,
+  Quinary, Senary, Septenary, Ternary, Unary
 } from '../operators';
 
 /**
@@ -10,7 +11,6 @@ import {
  *
  * @note Ramda's `both`.
  * @example
- * ```typescript
  * const larger = curry((limit, num) => num > limit);
  * const smaller = curry((limit, num) => num < limit);
  * const between = (min, max) => and(larger(min), smaller(max));
@@ -19,22 +19,30 @@ import {
  * // true
  * between0and10(15);
  * // false
- * ```
  */
 export function and(...functions: Nullary<unknown>[]): Nullary<boolean>;
 export function and<A>(...functions: Unary<A, unknown>[]): Unary<A, boolean>;
+// prettier-ignore
 export function and<A, B>(...functions: Binary<A, B, unknown>[]): Binary<A, B, boolean>;
+// prettier-ignore
 export function and<A, B, C>(...functions: Ternary<A, B, C, unknown>[]): Ternary<A, B, C, boolean>;
+// prettier-ignore
 export function and<A, B, C, D>(...functions: Quaternary<A, B, C, D, unknown>[]): Quaternary<A, B, C, D, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E>(...functions: Quinary<A, B, C, D, E, unknown>[]): Quinary<A, B, C, D, E, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E, F>(...functions: Senary<A, B, C, D, E, F, unknown>[])
 : Senary<A, B, C, D, E, F, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E, F, G>(...functions: Septenary<A, B, C, D, E, F, G, unknown>[])
 : Septenary<A, B, C, D, E, F, G, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E, F, G, H>(...functions: Octonary<A, B, C, D, E, F, G, H, unknown>[])
 : Octonary<A, B, C, D, E, F, G, H, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E, F, G, H, I>(...functions: Novenary<A, B, C, D, E, F, G, H, I, unknown>[])
 : Novenary<A, B, C, D, E, F, G, H, I, boolean>;
+// prettier-ignore
 export function and<A, B, C, D, E, F, G, H, I, J>(...functions: Denary<A, B, C, D, E, F, G, H, I, J, unknown>[])
 : Denary<A, B, C, D, E, F, G, H, I, J, boolean>;
 

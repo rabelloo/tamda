@@ -8,9 +8,9 @@ import { unique } from '../list/unique';
  * @param arrayA Array to concatenate `arrayB` to.
  * @param arrayB Array to append to `arrayA`.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * union([1, 2, 3], [2, 3, 4]);
- * // [1, 2, 3, 4] ```
+ * // [1, 2, 3, 4]
  */
 export function union<T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[];
 /**
@@ -20,10 +20,10 @@ export function union<T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[];
  * returns the set of union objects that are a member of A, or B, or both.
  * @param arrayB Array to append to `arrayA`.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const join = union([2, 3, 4])
  * join([1, 2, 3]);
- * // [1, 2, 3, 4] ```
+ * // [1, 2, 3, 4]
  */
 export function union<T>(arrayB: T[], keyFn?: KeyFn<T>): typeof deferred;
 export function union() {

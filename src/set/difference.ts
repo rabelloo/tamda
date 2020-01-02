@@ -7,9 +7,9 @@ import { infer } from '../function/infer';
  * @param arrayA Array to filter.
  * @param arrayB Array to check for duplicates.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * difference([1, 2, 3], [2, 3, 4]);
- * // [1] ```
+ * // [1]
  */
 export function difference<T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[];
 /**
@@ -20,10 +20,10 @@ export function difference<T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[];
  * @param arrayA Array to filter.
  * @param arrayB Array to check for duplicates.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const diff = difference([2, 3, 4]);
  * diff([1, 2, 3]);
- * // [1] ```
+ * // [1]
  */
 export function difference<T>(arrayB: T[], keyFn?: KeyFn<T>): typeof deferred;
 export function difference() {

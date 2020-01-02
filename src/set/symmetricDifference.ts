@@ -10,9 +10,9 @@ import { union } from './union';
  * @param arrayA First array to find and compare items.
  * @param arrayB Second array to find and compare items.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * symmetricDifference([1, 2, 3], [2, 3, 4]);
- * // [1, 4] ```
+ * // [1, 4]
  */
 export function symmetricDifference<T>(
   arrayA: T[],
@@ -27,10 +27,10 @@ export function symmetricDifference<T>(
  * (elements which are in one of the sets, but not in both).
  * @param arrayB Second array to find and compare items.
  * @param keyFn Optional function to extract a key for comparison between array items. Default: `identity()`.
- * @example ```typescript
+ * @example
  * const symDiff = symmetricDifference([2, 3, 4]);
  * symDiff([1, 2, 3]);
- * // [1, 4] ```
+ * // [1, 4]
  */
 export function symmetricDifference<T>(
   arrayB: T[],
