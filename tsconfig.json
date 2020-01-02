@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
 
-    "lib": ["es2017", "dom"],
+    "lib": ["es2019", "dom"],
 
     "alwaysStrict": true,
     "declaration": true,

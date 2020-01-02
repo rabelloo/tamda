@@ -17,4 +17,17 @@ describe('slice', () => {
       expect(`${result}`).toEqual('1,2');
     });
   });
+
+  it('should correctly apply defaults', () => {
+    const array = [1, 2, 3];
+
+    const results = [
+      slice () (array),
+      slice () (`${array}`),
+    ];
+
+    results.forEach(result => {
+      expect(`${result}`).toEqual('1,2,3');
+    });
+  });
 });

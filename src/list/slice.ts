@@ -31,7 +31,7 @@ export function slice() {
  */
 declare function deferred<T, L extends string | T[]>(list: L): L;
 
-const sliceable = (obj: any) => obj && obj.slice instanceof Function;
+const sliceable = (obj: any) => obj?.slice instanceof Function;
 
 const inferred = infer(
   <T>(list: T[], start?: number, end?: number): T[] => list.slice(start, end),
