@@ -1,10 +1,11 @@
-import { Unary } from '../operators';
-
 /**
- * Creates a function that can infer the first argument according to the number of supplied arguments.
+ * Creates a clone function that can infer the call readiness state of `fn` according to `ready`.
  *
- * If all arguments are supplied, immediately invokes the function.
- * Otherwise, return a function that expects the first argument of the original function.
+ * When called, if `ready(...args)`, immediately invokes `fn`.
+ *
+ * Otherwise, returns a `partialRight` applied function that expects the first argument of `fn`.
+ *
+ * @param fn Function to infer.
  *
  * @param ready Optionally determine when a function is ready for execution.
  * Default `args.length >= fn.length`.
@@ -16,34 +17,25 @@ import { Unary } from '../operators';
  * // [2, 3, 4]
  * inferredMap (n => n + 1) ([1, 2, 3]);
  * // [2, 3, 4]
- *
- * Useful for composing/piping, e.g.
- *
- * const transform = pipe(
- *  map(n => n + 1),
- *  map(n => n * 2),
- *  filter(n => n > 5)
- * );
- * transform([1, 2, 3]);
- * // [6, 8]
  */
-export function infer<T, R>(
-  fn: Infer<T, R>,
-  ready = isReady(fn)
-): Inferred<T, R> {
-  // tslint:disable-next-line: only-arrow-functions
-  return function() {
-    // faster than spread, i.e. (...args: unknown[]) => {}
-    const args = arguments;
-
-    return ready(args as any)
-      ? fn.apply(undefined, args)
-      : (first: T) => fn(first, ...args);
-  };
+export function infer<FirstArg, TailArgs extends Arr, Result>(
+  fn: (...args: [FirstArg, ...TailArgs]) => Result,
+  ready = isReady<FirstArg, TailArgs>(fn)
+): Inferred<FirstArg, TailArgs, Result> {
+  return ((...args: [FirstArg, ...TailArgs] | TailArgs) =>
+    ready(args)
+      ? fn(...args)
+      : (firstArg: FirstArg) => fn(firstArg, ...args)) as any;
 }
 
-const isReady = <T, R>(fn: Infer<T, R>) => (args: unknown[]) =>
-  args.length >= fn.length;
+const isReady = <FirstArg, TailArgs extends Arr>(fn: Func) => (
+  args: [FirstArg, ...TailArgs] | TailArgs
+): args is [FirstArg, ...TailArgs] => args.length >= fn.length;
 
-type Infer<T, R> = (first: T, ...args: any[]) => R | Unary<T, R>;
-type Inferred<T, R> = (...args: unknown[]) => R & Unary<T, R>;
+type Arr = readonly unknown[];
+type Func = (...args: Arr) => unknown;
+
+type Inferred<F, T extends Arr, R> = ReadyFn<F, T, R> & PartialFn<F, T, R>;
+
+type ReadyFn<F, T extends Arr, R> = (firstArg: F, ...tailArgs: T) => R;
+type PartialFn<F, T extends Arr, R> = (...tailArgs: T) => (firstArg: F) => R;
