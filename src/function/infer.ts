@@ -28,12 +28,12 @@ export function infer<FirstArg, TailArgs extends Arr, Result>(
       : (firstArg: FirstArg) => fn(firstArg, ...(args as TailArgs))) as any;
 }
 
-const isReady = <FirstArg, TailArgs extends Arr>(fn: Func) => (
+const isReady = <FirstArg, TailArgs extends Arr>(fn: Fn) => (
   args: [FirstArg, ...TailArgs] | TailArgs
 ) => args.length >= fn.length;
 
 type Arr = readonly unknown[];
-type Func = (...args: Arr) => unknown;
+type Fn = (...args: Arr) => unknown;
 
 type Inferred<F, T extends Arr, R> = ReadyFn<F, T, R> & PartialFn<F, T, R>;
 
