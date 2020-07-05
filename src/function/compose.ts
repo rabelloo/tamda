@@ -17,7 +17,7 @@ export const compose: Compose = <
   const initOperator = operators.pop() as InitOp;
   return (...start: Args) =>
     operators.reduceRight(
-      (previousValue, nextOp) => nextOp(previousValue),
+      (currentValue, nextOp) => nextOp(currentValue),
       initOperator(...start)
     ) as Result;
 };
