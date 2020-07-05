@@ -24,13 +24,13 @@ export function infer<FirstArg, TailArgs extends Arr, Result>(
 ): Inferred<FirstArg, TailArgs, Result> {
   return ((...args: [FirstArg, ...TailArgs] | TailArgs) =>
     ready(args)
-      ? fn(...args)
-      : (firstArg: FirstArg) => fn(firstArg, ...args)) as any;
+      ? fn(...(args as [FirstArg, ...TailArgs]))
+      : (firstArg: FirstArg) => fn(firstArg, ...(args as TailArgs))) as any;
 }
 
 const isReady = <FirstArg, TailArgs extends Arr>(fn: Func) => (
   args: [FirstArg, ...TailArgs] | TailArgs
-): args is [FirstArg, ...TailArgs] => args.length >= fn.length;
+) => args.length >= fn.length;
 
 type Arr = readonly unknown[];
 type Func = (...args: Arr) => unknown;

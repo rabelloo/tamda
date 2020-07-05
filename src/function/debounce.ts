@@ -20,7 +20,7 @@ export function debounce<F extends Fn>(fn: F, time = 0): F {
   return ((...args: unknown[]) => {
     clearTimeout(timeout);
     timeout = setTimeout(fn, time, ...args) as any;
-  }) as F;
+  }) as any;
 }
 
 type Fn = (...args: unknown[]) => unknown;
