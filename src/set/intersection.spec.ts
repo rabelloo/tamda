@@ -6,6 +6,7 @@ describe('intersection', () => {
     const arrayB = [2, 3, 4];
     const fn = (n: number) => n;
 
+    // prettier-ignore
     const results = [
       intersection(arrayA, arrayB),
       intersection (arrayB) (arrayA),
@@ -14,7 +15,7 @@ describe('intersection', () => {
       intersection (arrayB, fn) (arrayA),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([2, 3]);
     });
   });
