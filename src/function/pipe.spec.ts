@@ -2,16 +2,29 @@ import { pipe } from './pipe';
 
 describe('pipe', () => {
   it('should compose a series of unary functions into a single left-to-right function', () => {
-    const subtract = (b: number) => (a: number) => a - b;
-    const multiply = (b: number) => (a: number) => a * b;
-    const sum = (b: number) => (a: number) => a + b;
+    const concat = (b: string) => (a: string) => a + b;
 
     const piped = pipe(
-      sum(1),
-      multiply(2),
-      subtract(1)
+      concat('b'),
+      concat('c'),
+      concat('d'),
+      concat('e'),
+      concat('f')
     );
 
-    expect(piped(1)).toBe(3);
+    expect(piped('a')).toBe('abcdef');
+  });
+
+  it('should accept n-ary function as first argument/operator', () => {
+    const identity = (a: any) => a;
+
+    const piped = pipe(
+      (a: string, b: boolean) => a + b,
+      identity,
+      identity,
+      identity
+    );
+
+    expect(piped('foo', true)).toBe('footrue');
   });
 });
