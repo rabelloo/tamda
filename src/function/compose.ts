@@ -1,8 +1,3 @@
-import { Unary } from '../operators';
-
-type Fn = (...args: any) => any;
-type In<F extends Fn, R> = Unary<ReturnType<F>, R>;
-
 /**
  * Composes a series of `Unary` operations into a single function.
  *
@@ -10,175 +5,169 @@ type In<F extends Fn, R> = Unary<ReturnType<F>, R>;
  *
  * Opposite function composition direction of `pipe`.
  */
-export function compose<Op extends Fn>(operator: Op): Op;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, R>(
-  op2: In<Op, R>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, R>(
-  op3: Unary<A, R>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, R>(
-  op4: Unary<B, R>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, R>(
-  op5: Unary<C, R>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, D, R>(
-  op6: Unary<D, R>,
-  op5: Unary<C, D>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, D, E, R>(
-  op7: Unary<E, R>,
-  op6: Unary<D, E>,
-  op5: Unary<C, D>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, D, E, F, R>(
-  op8: Unary<F, R>,
-  op7: Unary<E, F>,
-  op6: Unary<D, E>,
-  op5: Unary<C, D>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, D, E, F, G, R>(
-  op9: Unary<G, R>,
-  op8: Unary<F, G>,
-  op7: Unary<E, F>,
-  op6: Unary<D, E>,
-  op5: Unary<C, D>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<Op extends Fn, A, B, C, D, E, F, G, H, R>(
-  op10: Unary<H, R>,
-  op9: Unary<G, H>,
-  op8: Unary<F, G>,
-  op7: Unary<E, F>,
-  op6: Unary<D, E>,
-  op5: Unary<C, D>,
-  op4: Unary<B, C>,
-  op3: Unary<A, B>,
-  op2: In<Op, A>,
-  op1: Op
-): // prettier-ignore
-/** Executes all the previously specified functions in the composition. */
-(...args: Parameters<Op>) => R;
-
-/**
- * Composes a series of `Unary` operations into a single function.
- *
- * Performs right-to-left function composition.
- *
- * Opposite function composition direction of `pipe`.
- */
-export function compose<O extends Unary<unknown, unknown>>(
-  ...operators: O[]
-): (start: unknown) => unknown {
-  const lastOperator = operators.pop()!;
-  return (...start) =>
+export const compose: Compose = <
+  Args extends Arr,
+  InitOp extends (...args: Args) => unknown,
+  FinalOp extends (...args: Args) => Result,
+  Result,
+  Op extends Unary[]
+>(
+  ...operators: [FinalOp, ...Op, InitOp]
+): ((...start: Args) => Result) => {
+  const initOperator = operators.pop() as InitOp;
+  return (...start: Args) =>
     operators.reduceRight(
-      (previousValue, op) => op(previousValue),
-      lastOperator(...start)
-    );
+      (previousValue, nextOp) => nextOp(previousValue),
+      initOperator(...start)
+    ) as Result;
+};
+
+type Arr = readonly unknown[];
+type Fn = (...args: Arr) => unknown;
+type Unary = (arg: unknown) => unknown;
+
+interface Compose {
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <Op extends Fn>(operator: Op): Op;
+
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, R>(op2: (b: B) => R, op1: (...args: A) => B): (
+    ...args: A
+  ) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, R>(
+    op3: (c: C) => R,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, R>(
+    op4: (d: D) => R,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, R>(
+    op5: (e: E) => R,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, F, R>(
+    op6: (f: F) => R,
+    op5: (e: E) => F,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, F, G, R>(
+    op7: (g: G) => R,
+    op6: (f: F) => G,
+    op5: (e: E) => F,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, F, G, H, R>(
+    op8: (h: H) => R,
+    op7: (g: G) => H,
+    op6: (f: F) => G,
+    op5: (e: E) => F,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, F, G, H, I, R>(
+    op9: (i: I) => R,
+    op8: (h: H) => I,
+    op7: (g: G) => H,
+    op6: (f: F) => G,
+    op5: (e: E) => F,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
+  <A extends Arr, B, C, D, E, F, G, H, I, J, R>(
+    op10: (j: J) => R,
+    op9: (i: I) => J,
+    op8: (h: H) => I,
+    op7: (g: G) => H,
+    op6: (f: F) => G,
+    op5: (e: E) => F,
+    op4: (d: D) => E,
+    op3: (c: C) => D,
+    op2: (b: B) => C,
+    op1: (...args: A) => B
+  ): (...args: A) => R;
 }

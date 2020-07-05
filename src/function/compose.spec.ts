@@ -9,9 +9,10 @@ describe('compose', () => {
     const composed = compose(
       subtract(1),
       multiply(2),
-      sum(1)
+      sum(1),
+      (_a: string, _b: boolean) => 1
     );
 
-    expect(composed(1)).toBe(3);
+    expect(composed('foo', true)).toBe(3);
   });
 });
