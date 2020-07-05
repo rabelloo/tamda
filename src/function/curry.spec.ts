@@ -9,25 +9,27 @@ describe('curry', () => {
     expect(curried(1)(1)).toBe(2);
   });
 
-  it('should optimize arities up to 5', () => {
+  it('should optimize arities up to 10', () => {
     const nAry0 = () => 0;
     const nAry1 = (a: number) => a;
     const nAry2 = (a: number, b: number) => a + b;
     const nAry3 = (a: number, b: number, c: number) => a + b + c;
     const nAry4 = (a: number, b: number, c: number, d: number) => a + b + c + d;
-    const nAry5 = (a: number, b: number, c: number, d: number, e: number) =>
-      a + b + c + d + e;
-    const nAry6 = (a: number, b: number, c: number, d: number, e: number, f: number) =>
-      a + b + c + d + e + f;
-    const nAry7 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number) =>
-      a + b + c + d + e + f + g;
+    // prettier-ignore
+    const nAry5 = (a: number, b: number, c: number, d: number, e: number) => a + b + c + d + e;
+    // prettier-ignore
+    const nAry6 = (a: number, b: number, c: number, d: number, e: number, f: number) => a + b + c + d + e + f;
+    // prettier-ignore
+    const nAry7 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => a + b + c + d + e + f + g;
+    // prettier-ignore
     const nAry8 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) =>
       a + b + c + d + e + f + g + h;
+    // prettier-ignore
     const nAry9 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) =>
       a + b + c + d + e + f + g + h + i;
-    const nAry10 = (
-      a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number
-    ) => a + b + c + d + e + f + g + h + i + j;
+    // prettier-ignore
+    const nAry10 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number) =>
+      a + b + c + d + e + f + g + h + i + j;
 
     const curriedFunctions = [
       curry(nAry0),
@@ -43,22 +45,23 @@ describe('curry', () => {
       curry(nAry10),
     ];
 
-    const loop = (fn: (arg: any) => any, times: number, value = 1) =>
-      Array(times || 1).fill(null).reduce(next => next(value), fn);
+    const chainCallTimes = (fn: (arg: any) => any, times: number, value = 1) =>
+      Array(times || 1)
+        .fill(null)
+        .reduce((next) => next(value), fn);
 
     curriedFunctions.forEach((fn, i) => {
-      expect(loop(fn, i)).toBe(i);
+      expect(chainCallTimes(fn, i)).toBe(i);
     });
   });
 
   it(`should support arities larger than 10, however it's not optimized`, () => {
-    const nAry11 = (
-      a: number, b: number, c: number, d: number, e: number, f: number,
-      g: number, h: number, i: number, j: number, k: number
-    ) => a + b + c + d + e + f + g + h + i + j + k;
+    // prettier-ignore
+    const nAry11 = (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number) =>
+      a + b + c + d + e + f + g + h + i + j + k;
 
-    const c11 = curry(nAry11);
+    const curried11 = curry(nAry11);
 
-    expect(c11(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)).toBe(11);
+    expect(curried11(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)(1)).toBe(11);
   });
 });
