@@ -3,24 +3,28 @@
  * avoiding computation when a matching set is invoked again.
  * @param fn Function to memoize.
  */
-export function memoize<F extends Fn>(fn: F): F {
-  const cache = new Map();
+export function memoize<F extends (...args: Args) => R, Args extends Arr, R>(
+  fn: F
+): F {
+  const cache: OpaqueMap = new Map();
 
-  return ((...args: any[]) => navigate(cache, fn, args)) as any;
+  return ((...args: Args) => navigate(cache, fn, args)) as F;
 }
 
-const resultKey = '~result~';
+const resultKey = Symbol('~result~');
 
-type Fn = (...args: any) => any;
-
-function navigate(cache: Map<any, any>, fn: Fn, args: any[]) {
+function navigate(cache: OpaqueMap, fn: Fn, args: Arr) {
   const leaf = args.reduce(
-    (branch, arg) => getOrSet(branch, arg, () => new Map()),
+    (branch: OpaqueMap, arg) => get(branch, arg, () => new Map()),
     cache
-  );
-  return getOrSet(leaf, resultKey, () => fn.apply(undefined, args));
+  ) as OpaqueMap;
+
+  return get(leaf, resultKey, () => fn(...args));
 }
 
-function getOrSet(map: Map<any, any>, key: any, computeValue: () => any) {
-  return map.has(key) ? map.get(key) : map.set(key, computeValue()).get(key);
-}
+const get = (map: OpaqueMap, key: unknown, computeValue: () => unknown) =>
+  map.has(key) ? map.get(key) : map.set(key, computeValue()).get(key);
+
+type Arr = readonly unknown[];
+type Fn = (...args: Arr) => unknown;
+type OpaqueMap = Map<unknown, unknown>;
