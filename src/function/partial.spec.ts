@@ -2,10 +2,10 @@ import { partial } from './partial';
 
 describe('partial', () => {
   it('should create a partially applied version of the supplied function', () => {
-    const fn = (a: number, b: number, c: number, d: number) => a + b + c + d;
+    const fn = (a: string, b: string, c: string, d: string) => a + b + c + d;
 
-    const partially = partial(fn, 1, 1);
+    const partially = partial(fn, 'a', 'b');
 
-    expect(partially(1, 1)).toBe(4);
+    expect(partially('c', 'd')).toBe('abcd');
   });
 });
