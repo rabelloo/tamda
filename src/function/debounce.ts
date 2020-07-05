@@ -14,13 +14,13 @@
  * setTimeout(() => console.log(count));
  * // 1
  */
-// tslint:disable-next-line: ban-types
-export function debounce<F extends Function>(fn: F, time = 0): F {
-  let timeout: number;
+export function debounce<F extends Fn>(fn: F, time = 0): F {
+  let timeout: NodeJS.Timeout;
 
-  // tslint:disable-next-line: only-arrow-functions
-  return function() {
+  return ((...args: any[]) => {
     clearTimeout(timeout);
-    timeout = setTimeout(fn as any, time, ...arguments);
-  } as any;
+    timeout = setTimeout(fn, time, ...args);
+  }) as any;
 }
+
+type Fn = (...args: any[]) => any;
