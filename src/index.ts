@@ -1,9 +1,3 @@
-// Types and Interfaces
-export { ObjectMap } from './object-map';
-export { Mapper } from './object/transform';
-export { Unary, Binary, Ternary } from './operators';
-export { WithValue } from './with-value';
-
 // Function
 export { compose } from './function/compose';
 export { curry } from './function/curry';

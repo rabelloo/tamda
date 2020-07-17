@@ -1,6 +1,6 @@
-import { WithValue } from '../with-value';
 import { compose } from './compose';
 import { pipe } from './pipe';
+import { WithValue } from './with-value.type';
 
 /**
  * Creates an object with functions `compose` and `pipe` that will
@@ -19,10 +19,10 @@ export function use<T>(value: T): WithValue<T> {
   };
 }
 
-// tslint:disable-next-line: ban-types
-function applyWith(fn: Function, value: unknown) {
-  // tslint:disable-next-line: only-arrow-functions
-  return function() {
-    return fn.apply(undefined, arguments)(value);
-  };
+function applyWith(fn: Partial, value: unknown) {
+  return (...args: Arr) => fn(...args)(value);
 }
+
+type Arr = readonly unknown[];
+type Fn = (...args: Arr) => unknown;
+type Partial = (...args: Arr) => Fn;

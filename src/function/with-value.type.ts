@@ -1,10 +1,17 @@
-import { Unary } from './operators';
+import { Unary } from '../operators';
 
 /**
  * Object with an already supplied value that will be used to
  * immediately execute `compose` or `pipe` when called.
  */
 export interface WithValue<A> {
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs right-to-left function composition.
+   *
+   * Opposite function composition direction of `pipe`.
+   */
   compose<B>(operator: Unary<A, B>): B;
   compose<B, C>(op1: Unary<A, B>, op2: Unary<B, C>): C;
   compose<B, C, D>(op1: Unary<A, B>, op2: Unary<B, C>, op3: Unary<C, D>): D;
@@ -81,6 +88,15 @@ export interface WithValue<A> {
    */
   compose(...operators: Unary<any, any>[]): any;
 
+  /**
+   * Composes a series of `Unary` operations into a single function.
+   *
+   * Performs left-to-right function composition.
+   *
+   * Opposite function composition direction of `compose`.
+   *
+   * In some libraries this function is named `sequence`.
+   */
   pipe<B>(operator: Unary<A, B>): B;
   pipe<B, C>(op1: Unary<A, B>, op2: Unary<B, C>): C;
   pipe<B, C, D>(op1: Unary<A, B>, op2: Unary<B, C>, op3: Unary<C, D>): D;

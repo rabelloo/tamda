@@ -10,21 +10,29 @@ describe('use', () => {
 
   describe('use().compose()', () => {
     it('should compose the supplied functions then immediately invoke it with the previously supplied value', () => {
-      const sum = (b: number) => (a: number) => a + b;
+      const concat = (a: string) => (b: string) => a + b;
 
-      const result = use(1).compose(sum(1));
+      const result = use('').compose(
+        concat('Hello'),
+        concat(' '),
+        concat('World!')
+      );
 
-      expect(result).toBe(2);
+      expect(result).toBe('Hello World!');
     });
   });
 
   describe('use().pipe()', () => {
     it('should pipe the supplied functions then immediately invoke it with the previously supplied value', () => {
-      const sum = (b: number) => (a: number) => a + b;
+      const concat = (b: string) => (a: string) => a + b;
 
-      const result = use(1).pipe(sum(1));
+      const result = use('').pipe(
+        concat('Hello'),
+        concat(' '),
+        concat('World!')
+      );
 
-      expect(result).toBe(2);
+      expect(result).toBe('Hello World!');
     });
   });
 });
