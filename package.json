@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "tslint src/**/*.ts",
+    "lint": "tslint -p tsconfig.json",
     "test": "jest --coverage",
     "prepublishOnly": "npm run build"
   },
