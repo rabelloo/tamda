@@ -15,12 +15,12 @@
  * // 1
  */
 export function debounce<F extends Fn>(fn: F, time = 0): F {
-  let timeout: NodeJS.Timeout;
+  let timeout: number;
 
-  return ((...args: any[]) => {
+  return ((...args: unknown[]) => {
     clearTimeout(timeout);
-    timeout = setTimeout(fn, time, ...args);
-  }) as any;
+    timeout = setTimeout(fn, time, ...args) as any;
+  }) as F;
 }
 
-type Fn = (...args: any[]) => any;
+type Fn = (...args: unknown[]) => unknown;
