@@ -5,7 +5,7 @@
  */
 export function opposite<F extends NumberFn>(fn: F): F {
   // tslint:disable-next-line: only-arrow-functions
-  return function() {
+  return function () {
     return fn.apply(undefined, arguments) * -1;
   } as F;
 }

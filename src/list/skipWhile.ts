@@ -24,9 +24,7 @@ export function skipWhile() {
  */
 declare function deferred<T>(array: T[]): T[];
 
-const inferred = infer(
-  <T>(array: T[], whileFn: Predicate<T>): T[] => {
-    const index = array.findIndex(not(whileFn));
-    return index === -1 ? [] : array.slice(index);
-  }
-);
+const inferred = infer(<T>(array: T[], whileFn: Predicate<T>): T[] => {
+  const index = array.findIndex(not(whileFn));
+  return index === -1 ? [] : array.slice(index);
+});

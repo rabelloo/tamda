@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "tslint -p tsconfig.json && prettier . -c",
     "test": "jest --coverage",
     "prepublishOnly": "npm run build"
   },

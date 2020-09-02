@@ -56,7 +56,7 @@ const inferred = infer(
 
     return union(diffA, diffB, keyFn);
   },
-  args => [args[0], args[1]].every(arg => arg instanceof Array)
+  (args) => [args[0], args[1]].every((arg) => arg instanceof Array)
 );
 
 type KeyFn<T> = (item: T, index: number) => any;

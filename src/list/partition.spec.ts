@@ -13,8 +13,11 @@ describe('partition', () => {
       partition(fn)(array),
     ];
 
-    results.forEach(result => {
-      expect(result).toEqual([[1, [1]], [2, [2, 2]]]);
+    results.forEach((result) => {
+      expect(result).toEqual([
+        [1, [1]],
+        [2, [2, 2]],
+      ]);
     });
   });
 });

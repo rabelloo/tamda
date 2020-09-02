@@ -42,5 +42,5 @@ const inferred = infer(
         return map;
       }, new Map<K, T[]>())
     ),
-  args => args[0] instanceof Array
+  (args) => args[0] instanceof Array
 );

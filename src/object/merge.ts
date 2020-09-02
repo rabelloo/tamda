@@ -29,7 +29,9 @@ export function merge() {
  * @note Same as `{ ...objA, ...objB }`
  * @param objA Object on the left of the merge.
  */
-declare function deferred<A extends Indexable, B extends Indexable>(objA: A): A & B;
+declare function deferred<A extends Indexable, B extends Indexable>(
+  objA: A
+): A & B;
 
 const inferred = infer(
   <A extends Indexable, B extends Indexable>(objA: A, objB: B): A & B => ({

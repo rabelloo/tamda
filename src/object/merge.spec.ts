@@ -5,12 +5,9 @@ describe('merge', () => {
     const objA = { id: 1, foo: 'bar' };
     const objB = { id: 2, bar: 'foo' };
 
-    const results = [
-      merge(objA, objB),
-      merge (objB) (objA),
-    ];
+    const results = [merge(objA, objB), merge(objB)(objA)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual({ id: 2, foo: 'bar', bar: 'foo' });
     });
   });

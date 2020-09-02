@@ -8,12 +8,12 @@ describe('slice', () => {
 
     const results = [
       slice(array, start, end),
-      slice (start, end) (array),
+      slice(start, end)(array),
 
       slice(`${array}`, start, end + 1),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(`${result}`).toEqual('1,2');
     });
   });
@@ -21,12 +21,9 @@ describe('slice', () => {
   it('should correctly apply defaults', () => {
     const array = [1, 2, 3];
 
-    const results = [
-      slice () (array),
-      slice () (`${array}`),
-    ];
+    const results = [slice()(array), slice()(`${array}`)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(`${result}`).toEqual('1,2,3');
     });
   });

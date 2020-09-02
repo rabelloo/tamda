@@ -34,12 +34,16 @@ interface Options {
 }
 
 const inferred = infer(
-  <T>(array: T[], mapFn: MapFn<T>, options: Options = { reverse: false }): T[] =>
+  <T>(
+    array: T[],
+    mapFn: MapFn<T>,
+    options: Options = { reverse: false }
+  ): T[] =>
     sort(
       array,
       !options.reverse ? compareFn(mapFn) : opposite(compareFn(mapFn))
     ),
-  args => args[0] instanceof Array
+  (args) => args[0] instanceof Array
 );
 
 function compareFn<T>(mapFn: MapFn<T>): (itemA: T, itemB: T) => number {

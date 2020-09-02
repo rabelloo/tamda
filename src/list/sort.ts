@@ -34,5 +34,5 @@ type CompareFn<T> = (a: T, b: T) => number;
 const inferred = infer(
   <T>(array: T[], compareFn: CompareFn<T> = compareValue): T[] =>
     array.slice().sort(compareFn),
-  args => args[0] instanceof Array
+  (args) => args[0] instanceof Array
 );

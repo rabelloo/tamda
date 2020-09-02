@@ -5,12 +5,9 @@ describe('any', () => {
     const array = [-1, 0, 1, 2, 3];
     const fn = (n: number) => n > 0;
 
-    const results = [
-      any(array, fn),
-      any (fn) (array),
-    ];
+    const results = [any(array, fn), any(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(true);
     });
   });

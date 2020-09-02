@@ -31,5 +31,5 @@ declare function deferred<T extends Indexable>(array: T[]): T[keyof T][];
 
 const inferred = infer(
   <T extends Indexable, K extends keyof T>(array: T[], key: K): T[K][] =>
-    array.map(obj => obj[key])
+    array.map((obj) => obj[key])
 );

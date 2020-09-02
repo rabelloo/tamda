@@ -5,12 +5,9 @@ describe('pick', () => {
     const obj = { id: 1, foo: 'bar' };
     const prop = 'id';
 
-    const results = [
-      pick(obj, prop),
-      pick (prop) (obj),
-    ];
+    const results = [pick(obj, prop), pick(prop)(obj)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual({ id: 1 });
     });
   });

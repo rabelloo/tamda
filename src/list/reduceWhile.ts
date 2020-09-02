@@ -38,7 +38,12 @@ export function reduceWhile() {
 declare function deferred<T, R>(array: T[]): R;
 
 const inferred = infer(
-  <T, R>(array: T[], whileFn: ReducePredicate<T, R>, reduceFn: Reducer<T, R>, initialValue: R): R => {
+  <T, R>(
+    array: T[],
+    whileFn: ReducePredicate<T, R>,
+    reduceFn: Reducer<T, R>,
+    initialValue: R
+  ): R => {
     let accumulator = initialValue;
     for (let index = 0; index < array.length; index++) {
       const item = array[index];

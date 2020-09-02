@@ -5,12 +5,9 @@ describe('toObjectMap', () => {
     const array: O[] = [{ id: 1 }, { id: 2 }, { id: 2 }];
     const fn = (o: O) => o.id;
 
-    const results = [
-      toObjectMap(array, fn),
-      toObjectMap (fn) (array),
-    ];
+    const results = [toObjectMap(array, fn), toObjectMap(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual({ 1: { id: 1 }, 2: { id: 2 } });
     });
   });

@@ -35,5 +35,5 @@ const sliceable = (obj: any) => obj?.slice instanceof Function;
 
 const inferred = infer(
   <T>(list: T[], start?: number, end?: number): T[] => list.slice(start, end),
-  args => sliceable(args[0])
+  (args) => sliceable(args[0])
 );

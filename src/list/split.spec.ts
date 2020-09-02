@@ -5,13 +5,10 @@ describe('split', () => {
     const array = [1, 2, 3];
     const fn = (n: number) => n < 2;
 
-    const results = [
-      split(array, fn),
-      split (fn) (array),
-    ];
+    const results = [split(array, fn), split(fn)(array)];
 
-    results.forEach(result => {
-      expect(result).toEqual([ [1], [2, 3] ]);
+    results.forEach((result) => {
+      expect(result).toEqual([[1], [2, 3]]);
     });
   });
 });

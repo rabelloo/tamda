@@ -26,7 +26,6 @@ export function find() {
  */
 declare function deferred<T>(array: T[]): T | undefined;
 
-const inferred = infer(
-  <T>(array: T[], predicate: Predicate<T>): T | undefined =>
-    array.find(predicate)
-);
+const inferred = infer(<T>(array: T[], predicate: Predicate<T>):
+  | T
+  | undefined => array.find(predicate));

@@ -28,21 +28,18 @@ type KeyFn<T> = Mapper<T, number | string>;
 
 const inferred = infer(
   <T>(array: T[], keyFn: KeyFn<T>): ObjectMap<T[]> =>
-    array.reduce(
-      (groups, item, index) => {
-        const key = `${keyFn(item, index, array)}`;
+    array.reduce((groups, item, index) => {
+      const key = `${keyFn(item, index, array)}`;
 
-        // Initializes the array if undefined for the key.
-        if (!groups[key]) {
-          groups[key] = [];
-        }
+      // Initializes the array if undefined for the key.
+      if (!groups[key]) {
+        groups[key] = [];
+      }
 
-        // Faster than spreading the object and array, safe here
-        // i.e. { ...groups, [key]: [...groups[key], item] }
-        groups[key].push(item);
+      // Faster than spreading the object and array, safe here
+      // i.e. { ...groups, [key]: [...groups[key], item] }
+      groups[key].push(item);
 
-        return groups;
-      },
-      {} as ObjectMap<T[]>
-    )
+      return groups;
+    }, {} as ObjectMap<T[]>)
 );

@@ -23,21 +23,16 @@ export function flatMap() {
  */
 declare function deferred<T, R>(array: T[]): R[];
 
-const inferred = infer(
-  <T, R>(array: T[], mapFn: Mapper<T, R[]>): R[] => {
-    const mapOrEmpty = (item: T, index: number): R[] => {
-      const mapped = mapFn(item, index, array);
-      return mapped instanceof Array ? mapped : [];
-    };
+const inferred = infer(<T, R>(array: T[], mapFn: Mapper<T, R[]>): R[] => {
+  const mapOrEmpty = (item: T, index: number): R[] => {
+    const mapped = mapFn(item, index, array);
+    return mapped instanceof Array ? mapped : [];
+  };
 
-    return array.reduce(
-      (flatten, item, index) => {
-        // Faster than spreading, safe here
-        // i.e. [ ...flatten, ...mapOrEmpty(item, index) ]
-        flatten.push(...mapOrEmpty(item, index));
-        return flatten;
-      },
-      [] as R[]
-    );
-  }
-);
+  return array.reduce((flatten, item, index) => {
+    // Faster than spreading, safe here
+    // i.e. [ ...flatten, ...mapOrEmpty(item, index) ]
+    flatten.push(...mapOrEmpty(item, index));
+    return flatten;
+  }, [] as R[]);
+});

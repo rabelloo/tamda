@@ -8,10 +8,10 @@ describe('skip', () => {
     const results = [
       skip(array, amount),
       skip(`${array}`, amount + 1),
-      skip (amount) (array),
+      skip(amount)(array),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(`${result}`).toBe('2,3');
     });
   });

@@ -8,13 +8,13 @@ describe('difference', () => {
 
     const results = [
       difference(arrayA, arrayB),
-      difference (arrayB) (arrayA),
+      difference(arrayB)(arrayA),
 
       difference(arrayA, arrayB, fn),
-      difference (arrayB, fn) (arrayA),
+      difference(arrayB, fn)(arrayA),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1]);
     });
   });

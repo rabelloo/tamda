@@ -48,7 +48,7 @@ const inferred = infer(
 
     return arrayA.filter(filterFn);
   },
-  args => [args[0], args[1]].every(arg => arg instanceof Array)
+  (args) => [args[0], args[1]].every((arg) => arg instanceof Array)
 );
 
 type KeyFn<T> = (item: T, index: number) => any;

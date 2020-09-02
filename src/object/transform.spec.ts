@@ -5,11 +5,11 @@ describe('transform', () => {
     const obj: O = { id: 1, foo: 'bar' };
 
     const results = [
-      transform<O>(obj, { id: id => id + 1 }),
-      transform<O> ({ id: id => id + 1 }) (obj),
+      transform<O>(obj, { id: (id) => id + 1 }),
+      transform<O>({ id: (id) => id + 1 })(obj),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual({ ...obj, id: 2 });
     });
   });

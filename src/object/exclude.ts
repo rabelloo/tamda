@@ -45,5 +45,5 @@ const inferred = infer(
       },
       { ...source }
     ),
-  args => args[0] instanceof Object
+  (args) => args[0] instanceof Object
 );

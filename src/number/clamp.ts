@@ -25,7 +25,6 @@ export function clamp() {
  */
 declare function deferred(num: number): number;
 
-const inferred = infer(
-  (num: number, min: number, max: number): number =>
-    Math.max(Math.min(num, max), min)
+const inferred = infer((num: number, min: number, max: number): number =>
+  Math.max(Math.min(num, max), min)
 );

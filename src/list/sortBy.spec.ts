@@ -5,12 +5,9 @@ describe('sortBy', () => {
     const array: O[] = [{ id: 5 }, { id: 1 }, { id: 3 }, {} as any];
     const fn = (o: O) => o.id;
 
-    const results = [
-      sortBy(array, fn),
-      sortBy (fn) (array),
-    ];
+    const results = [sortBy(array, fn), sortBy(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([{}, { id: 1 }, { id: 3 }, { id: 5 }]);
       expect(result).not.toBe(array);
     });
@@ -21,12 +18,9 @@ describe('sortBy', () => {
     const fn = (n: number) => n;
     const options = { reverse: true };
 
-    const results = [
-      sortBy(array, fn, options),
-      sortBy (fn, options) (array),
-    ];
+    const results = [sortBy(array, fn, options), sortBy(fn, options)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([5, 3, 1]);
       expect(result).not.toBe(array);
     });
@@ -36,12 +30,9 @@ describe('sortBy', () => {
     const array = ['b', 'A', 'ą', 'B', 'a'];
     const fn = (s: string) => s;
 
-    const results = [
-      sortBy(array, fn),
-      sortBy (fn) (array),
-    ];
+    const results = [sortBy(array, fn), sortBy(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual(['a', 'A', 'ą', 'b', 'B']);
       expect(result).not.toBe(array);
     });

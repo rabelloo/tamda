@@ -7,13 +7,13 @@ describe('median', () => {
 
     const results = [
       median(arrayOdd),
-      median () (arrayOdd),
+      median()(arrayOdd),
 
       median(arrayEven),
-      median () (arrayEven),
+      median()(arrayEven),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(14);
     });
   });

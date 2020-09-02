@@ -8,10 +8,10 @@ describe('take', () => {
     const results = [
       take(array, amount),
       take(`${array}`, amount + 1),
-      take (amount) (array),
+      take(amount)(array),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(`${result}`).toBe('1,2');
     });
   });

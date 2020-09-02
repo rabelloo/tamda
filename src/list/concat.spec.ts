@@ -7,16 +7,16 @@ describe('concat', () => {
 
     const results = [
       concat(array, item),
-      concat (item) (array),
+      concat(item)(array),
 
       concat(array, [item]),
-      concat ([item]) (array),
+      concat([item])(array),
 
       concat(`${array},`, `${item}`),
-      concat (`${item}`) (`${array},`),
+      concat(`${item}`)(`${array},`),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(`${result}`).toBe('1,2,3');
     });
   });

@@ -7,13 +7,13 @@ describe('contains', () => {
 
     const results = [
       contains(array, item),
-      contains (item) (array),
+      contains(item)(array),
 
       contains(`${array}`, `${item}`),
-      contains (`${item}`) (`${array}`),
+      contains(`${item}`)(`${array}`),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(true);
     });
   });

@@ -5,12 +5,9 @@ describe('find', () => {
     const array = [1, 2, 3];
     const fn = (n: number) => n === 2;
 
-    const results = [
-      find(array, fn),
-      find (fn) (array),
-    ];
+    const results = [find(array, fn), find(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(2);
     });
   });

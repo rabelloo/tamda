@@ -23,6 +23,6 @@ export function any() {
  */
 declare function deferred<T>(array: T[]): boolean;
 
-const inferred = infer(
-  <T>(array: T[], predicate: Predicate<T>): boolean => array.some(predicate)
+const inferred = infer(<T>(array: T[], predicate: Predicate<T>): boolean =>
+  array.some(predicate)
 );

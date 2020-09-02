@@ -20,6 +20,6 @@ export function flatten() {
  */
 declare function deferred<T>(array: (T | T[])[]): T[];
 
-const inferred = infer(
-  <T>(array: (T | T[])[]): T[] => Array.prototype.concat(...array)
+const inferred = infer(<T>(array: (T | T[])[]): T[] =>
+  Array.prototype.concat(...array)
 );

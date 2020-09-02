@@ -5,12 +5,9 @@ describe('takeWhile', () => {
     const array = [1, 2, 3];
     const fn = (n: number) => n < 3;
 
-    const results = [
-      takeWhile(array, fn),
-      takeWhile (fn) (array),
-    ];
+    const results = [takeWhile(array, fn), takeWhile(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1, 2]);
     });
   });
@@ -19,12 +16,9 @@ describe('takeWhile', () => {
     const array = [1, 2, 3];
     const fn = (n: number) => n < 0;
 
-    const results = [
-      takeWhile(array, fn),
-      takeWhile (fn) (array),
-    ];
+    const results = [takeWhile(array, fn), takeWhile(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([]);
     });
   });
@@ -33,12 +27,9 @@ describe('takeWhile', () => {
     const array = [1, 2, 3];
     const fn = (n: number) => n < 5;
 
-    const results = [
-      takeWhile(array, fn),
-      takeWhile (fn) (array),
-    ];
+    const results = [takeWhile(array, fn), takeWhile(fn)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1, 2, 3]);
     });
   });

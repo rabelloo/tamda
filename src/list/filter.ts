@@ -24,6 +24,6 @@ export function filter() {
  */
 declare function deferred<T>(array: T[]): T[];
 
-const inferred = infer(
-  <T>(array: T[], predicate: Predicate<T>): T[] => array.filter(predicate)
+const inferred = infer(<T>(array: T[], predicate: Predicate<T>): T[] =>
+  array.filter(predicate)
 );

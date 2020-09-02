@@ -9,10 +9,10 @@ describe('reduceWhile', () => {
 
     const results = [
       reduceWhile(array, predicate, fn, 0),
-      reduceWhile (predicate, fn, 0) (array),
+      reduceWhile(predicate, fn, 0)(array),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(6);
     });
   });

@@ -6,12 +6,9 @@ describe('between', () => {
     const min = 1;
     const max = 3;
 
-    const results = [
-      between(num, min, max),
-      between (min, max) (num),
-    ];
+    const results = [between(num, min, max), between(min, max)(num)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(true);
     });
   });

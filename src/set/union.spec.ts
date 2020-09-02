@@ -8,13 +8,13 @@ describe('union', () => {
 
     const results = [
       union(arrayA, arrayB),
-      union (arrayB) (arrayA),
+      union(arrayB)(arrayA),
 
       union(arrayA, arrayB, fn),
-      union (arrayB, fn) (arrayA),
+      union(arrayB, fn)(arrayA),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1, 2, 3, 4]);
     });
   });

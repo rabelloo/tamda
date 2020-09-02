@@ -5,12 +5,9 @@ describe('pluck', () => {
     const array: O[] = [{ id: 1 }, { id: 2 }];
     const key = 'id';
 
-    const results = [
-      pluck(array, key),
-      pluck (key) (array),
-    ];
+    const results = [pluck(array, key), pluck(key)(array)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1, 2]);
     });
   });

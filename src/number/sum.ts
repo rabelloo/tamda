@@ -18,6 +18,6 @@ export function sum() {
  */
 declare function deferred(array: number[]): number;
 
-const inferred = infer(
-  (array: number[]): number => array.reduce((total, n) => total + n, 0)
+const inferred = infer((array: number[]): number =>
+  array.reduce((total, n) => total + n, 0)
 );

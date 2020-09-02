@@ -49,7 +49,7 @@ export function and<A, B, C, D, E, F, G, H, I, J>(...functions: Denary<A, B, C, 
 // tslint:disable-next-line: ban-types
 export function and(...functions: Function[]): (...args: unknown[]) => boolean {
   // tslint:disable-next-line: only-arrow-functions
-  return function() {
-    return functions.every(fn => Boolean(fn.apply(undefined, arguments)));
+  return function () {
+    return functions.every((fn) => Boolean(fn.apply(undefined, arguments)));
   };
 }

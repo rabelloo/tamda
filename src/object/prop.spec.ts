@@ -5,12 +5,9 @@ describe('prop', () => {
     const obj: O = { id: 1 };
     const key = 'id';
 
-    const results = [
-      prop(obj, key),
-      prop (key) (obj),
-    ];
+    const results = [prop(obj, key), prop(key)(obj)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual(obj.id);
     });
   });

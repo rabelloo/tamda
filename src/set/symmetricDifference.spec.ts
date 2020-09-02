@@ -7,10 +7,10 @@ describe('symmetricDifference', () => {
 
     const results = [
       symmetricDifference(arrayA, arrayB),
-      symmetricDifference (arrayB) (arrayA),
+      symmetricDifference(arrayB)(arrayA),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual([1, 4]);
     });
   });

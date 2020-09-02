@@ -17,8 +17,14 @@ describe('infer', () => {
     // another use case is a function with spread arguments
     const spreadFn = (a: number, ...rest: string[]) => `${a}`.concat(...rest);
 
-    const defaultInferred = infer(defaultFn, args => args[0] instanceof Array);
-    const spreadInferred = infer(spreadFn, args => typeof args[0] === 'number');
+    const defaultInferred = infer(
+      defaultFn,
+      (args) => args[0] instanceof Array
+    );
+    const spreadInferred = infer(
+      spreadFn,
+      (args) => typeof args[0] === 'number'
+    );
 
     expect(defaultInferred('2')([1])).toBe('12');
     expect(defaultInferred([1])).toBe('1test');

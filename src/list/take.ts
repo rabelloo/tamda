@@ -29,6 +29,6 @@ export function take() {
  */
 declare function deferred<T, L extends string | T[]>(list: L): L;
 
-const inferred = infer(
-  <T>(list: T[], amount: number): T[] => slice(list, 0, amount)
+const inferred = infer(<T>(list: T[], amount: number): T[] =>
+  slice(list, 0, amount)
 );

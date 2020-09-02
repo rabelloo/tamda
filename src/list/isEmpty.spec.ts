@@ -6,13 +6,13 @@ describe('isEmpty', () => {
 
     const results = [
       isEmpty(array),
-      isEmpty () (array),
+      isEmpty()(array),
 
       isEmpty(`${array}`),
-      isEmpty () (`${array}`),
+      isEmpty()(`${array}`),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(false);
     });
   });

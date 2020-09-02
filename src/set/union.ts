@@ -41,7 +41,7 @@ declare function deferred<T>(arrayA: T[]): T[];
 const inferred = infer(
   <T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[] =>
     unique([...arrayA, ...arrayB], keyFn),
-  args => [args[0], args[1]].every(arg => arg instanceof Array)
+  (args) => [args[0], args[1]].every((arg) => arg instanceof Array)
 );
 
 type KeyFn<T> = (item: T, index: number) => any;

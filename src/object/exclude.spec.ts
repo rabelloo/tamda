@@ -5,12 +5,9 @@ describe('exclude', () => {
     const obj: O = { id: 1, foo: false };
     const key = 'foo';
 
-    const results = [
-      exclude(obj, key),
-      exclude (key) (obj),
-    ];
+    const results = [exclude(obj, key), exclude(key)(obj)];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual({ id: 1 });
     });
   });

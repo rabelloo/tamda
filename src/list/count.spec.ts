@@ -6,13 +6,13 @@ describe('count', () => {
 
     const results = [
       count(array),
-      count () (array),
+      count()(array),
 
       count(array.join('')),
-      count () (array.join('')),
+      count()(array.join('')),
     ];
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toBe(3);
     });
   });

@@ -36,7 +36,7 @@ However, all functions have an overload where the data argument is provided last
 
 Since the idea of using TypeScript is actually benefiting from type safety and inference, having these two overloads for each function makes using them stand-alone or when composing/piping a breeze, especially when TypeScript will be giving you all hints.
 
-Some functions have limitations on how much TypeScript can infer and may require some hinting - the API tries to make that as easy as possible, but the vast majority *just works*.
+Some functions have limitations on how much TypeScript can infer and may require some hinting - the API tries to make that as easy as possible, but the vast majority _just works_.
 
 It also means that functions are not "automatically curried" like in `Ramda`, where any number of arguments can be provided and the function will partially apply accordingly.
 
@@ -53,7 +53,7 @@ const data = [
   { type: 'imperative', name: 'for' },
 ];
 
-groupBy(data, d => d.type);
+groupBy(data, (d) => d.type);
 // {
 //   functional: [
 //     { type: 'functional', name: 'groupBy' },
@@ -81,7 +81,7 @@ const doubleSumUniqueOdds = pipe(
   filter((n: number) => n % 2),
   unique(),
   sum(),
-  map(n => n * 2) // infers the rest
+  map((n) => n * 2) // infers the rest
 );
 
 doubleSumUniqueOdds(data);
@@ -93,15 +93,9 @@ You can also inline pipe execution with `use`, which will infer the type beforeh
 ```typescript
 import { concat, not, pipe, pluck, reduceWhile, tap, use } from 'tamda';
 
-const data = [
-  { amount: 5 },
-  { amount: 4 },
-];
+const data = [{ amount: 5 }, { amount: 4 }];
 
-const moreData = [
-  { amount: 3 },
-  { amount: 2 },
-];
+const moreData = [{ amount: 3 }, { amount: 2 }];
 
 const hasEnough = (total: number) => total > 10;
 const accumulate = pipe(

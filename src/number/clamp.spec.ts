@@ -6,14 +6,11 @@ describe('clamp', () => {
     const min = 5;
     const max = 10;
 
-    const results = [
-      clamp(num, min, max),
-      clamp (min, max) (num),
-    ];
+    const results = [clamp(num, min, max), clamp(min, max)(num)];
 
     expect(clamp(1, min, max)).toEqual(5);
 
-    results.forEach(result => {
+    results.forEach((result) => {
       expect(result).toEqual(10);
     });
   });

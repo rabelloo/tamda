@@ -44,5 +44,5 @@ const inferred = infer(
           new Map(array.map((t, i) => [keyFn(t, i), t] as [any, T])).values()
         )
       : Array.from(new Set(array)),
-  args => args[0] instanceof Array
+  (args) => args[0] instanceof Array
 );
