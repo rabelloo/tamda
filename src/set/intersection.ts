@@ -40,10 +40,10 @@ interface Intersection {
    * inBoth([1, 2, 3]);
    * // [2, 3]
    */
-  <T>(arrayB: T[], keyFn?: KeyFn<T>): Deferred<T>;
+  <T>(arrayB: T[], keyFn?: KeyFn<T>): PartialIntersection<T>;
 }
 
-type Deferred<T> =
+type PartialIntersection<T> =
   /**
    * Filters items that are both in `arrayA` and previously specified `arrayB`.
    * @note From set theory, given sets A and B, denoted A ∩ B, returns the set of intersection members of both A and B.

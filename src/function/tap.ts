@@ -32,5 +32,12 @@ interface Tap {
    * console.log(foo);
    * // 'hi'
    */
-  <T>(fn: Tapper<T>): (value: T) => T;
+  <T>(fn: Tapper<T>): PartialTap<T>;
 }
+
+type PartialTap<T> =
+  /**
+   * Calls previously specified `fn` with `value`, then returns `value`.
+   * @param value Value to provide as argument when calling `fn`.
+   */
+  (value: T) => T;
