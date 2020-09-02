@@ -7,17 +7,11 @@
  */
 export function compareValue(a: any, b: any): 0 | 1 | -1 {
   if (a == null) {
-    if (b == null) {
-      return 0;
-    }
+    if (b == null) return 0;
     return -1;
   }
-  if (b == null || a > b) {
-    return 1;
-  }
-  if (a < b) {
-    return -1;
-  }
+  if (b == null || a > b) return 1;
+  if (a < b) return -1;
 
   return 0;
 }

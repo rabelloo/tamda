@@ -5,6 +5,6 @@
  * - -1 if `b > a`
  * - 0 otherwise
  */
-export function compareString(a: string, b: any): -1 | 0 | 1 {
-  return a.localeCompare(b) as any;
+export function compareString(a: string, b: string): -1 | 0 | 1 {
+  return a.localeCompare(b) as -1 | 0 | 1;
 }
