@@ -2,20 +2,20 @@ import { infer } from '../function/infer';
 
 export const intersection: Intersection = infer(
   _intersection,
-  ([_arg0, arg1]) => arg1 instanceof Array
+  ([, arg2]) => arg2 instanceof Array
 );
 
 function _intersection<T>(arrayA: T[], arrayB: T[], keyFn?: KeyFn<T>): T[] {
-  const setB = new Set<T>(keyFn ? arrayB.map(keyFn) : arrayB);
+  const setB = new Set(keyFn ? arrayB.map(keyFn) : arrayB);
 
-  const filterFn = keyFn
-    ? (item: T, index: number) => setB.has(keyFn(item, index))
-    : (item: T) => setB.has(item);
-
-  return arrayA.filter(filterFn);
+  return arrayA.filter(
+    keyFn
+      ? (item, index) => setB.has(keyFn(item, index))
+      : (item) => setB.has(item)
+  );
 }
 
-type KeyFn<T> = (item: T, index: number) => any;
+type KeyFn<T> = (item: T, index: number) => unknown;
 
 interface Intersection {
   /**
