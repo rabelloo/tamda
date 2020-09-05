@@ -19,3 +19,8 @@ coverage/
 
 # dotenv environment variables file
 .env
+
+# npm package
+*.tgz
+
+.vscode
