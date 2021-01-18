@@ -1,4 +1,4 @@
-# Tamda ~ [![Build Status](https://img.shields.io/travis/rabelloo/tamda.svg?logo=travis)](https://travis-ci.org/rabelloo/tamda) [![Coverage Status](https://codecov.io/gh/rabelloo/tamda/branch/master/graph/badge.svg)](https://codecov.io/gh/rabelloo/tamda) [![npm version](https://img.shields.io/npm/v/tamda.svg?logo=npm)](https://www.npmjs.com/package/tamda) [![dependencies](https://img.shields.io/david/rabelloo/tamda.svg)](https://david-dm.org/rabelloo/tamda)
+# Tamda ~ [![Build Status](https://img.shields.io/travis/rabelloo/tamda.svg?logo=travis)](https://travis-ci.org/rabelloo/tamda) [![Coverage Status](https://codecov.io/gh/rabelloo/tamda/branch/master/graph/badge.svg)](https://codecov.io/gh/rabelloo/tamda) [![npm version](https://img.shields.io/npm/v/tamda.svg?logo=npm)](https://www.npmjs.com/package/tamda) [![size](https://badgen.net/bundlephobia/minzip/tamda)](https://bundlephobia.com/result?p=tamda) [![dependencies](https://badgen.net/bundlephobia/dependency-count/tamda)](https://bundlephobia.com/result?p=tamda)
 
 Practical functional programming library for TypeScript
 
